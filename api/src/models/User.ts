@@ -1,4 +1,5 @@
 import { model, Schema } from 'mongoose'
+import bcrypt from 'bcrypt'
 
 interface IUser {
   name: string
@@ -19,6 +20,18 @@ const UserSchema = new Schema<IUser>({
   password: {
     type: Schema.Types.String,
     required: true
+  }
+})
+
+UserSchema.pre('save', async function (next) {
+  if (this.isNew || this.isModified('password')) {
+    try {
+      const hashedPassword = await bcrypt.hash(this.password, 10)
+      this.password = hashedPassword
+      next()
+    } catch (error) {
+      next(error as Error)
+    }
   }
 })
 
