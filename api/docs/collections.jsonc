@@ -1,0 +1,18 @@
+[
+  // Collection Note 
+  {
+    "title": "string",
+    "body": "string",
+    "owner": "ObjectId('User')",
+    "created_at": "Date",
+    "updated_at": "Date"
+  },
+  // Collection User
+  {
+    "name": "string",
+    "email": "string",
+    "password": "string",
+    "created_at": "Date",
+    "updated_at": "Date"
+  }
+]
