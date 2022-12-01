@@ -1,9 +1,9 @@
 [
-  // Collection Note 
+  // Collection Note
   {
     "title": "string",
     "body": "string",
-    "owner": "ObjectId('User')",
+    "author": "ObjectId('User')",
     "created_at": "Date",
     "updated_at": "Date"
   },
