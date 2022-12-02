@@ -12,7 +12,7 @@ export async function registerUser (req: Request, res: Response) {
       })
     }
 
-    const userAlreadyCreated = await User.find().where({ email })
+    const userAlreadyCreated = await User.findOne().where({ email })
     if (userAlreadyCreated) {
       return res.status(400).json({
         message: 'An account is already registered with your email.'
@@ -25,8 +25,13 @@ export async function registerUser (req: Request, res: Response) {
       password
     })
 
-    return res.status(201).json(newUser)
+    return res.status(201).json({
+      message: 'User created succesfully.',
+      _id: newUser._id,
+      name,
+      email
+    })
   } catch (error) {
-    return res.json(error)
+    return res.status(500).json(error)
   }
 }

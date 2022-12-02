@@ -5,6 +5,7 @@ interface IUser {
   name: string
   email: string
   password: string
+  verifyPassword: (password: string) => boolean
 }
 
 const UserSchema = new Schema<IUser>({
@@ -34,5 +35,9 @@ UserSchema.pre('save', async function (next) {
     }
   }
 })
+
+UserSchema.methods.verifyPassword = function (password: string) {
+  return bcrypt.compareSync(password, this.password)
+}
 
 export default model<IUser>('User', UserSchema)
