@@ -1,5 +1,6 @@
 import express from 'express'
 import dotenv from 'dotenv'
+import cors from 'cors'
 
 import { connectToMongo } from './database/mongo'
 
@@ -14,6 +15,7 @@ async function bootstrap () {
   await connectToMongo()
 
   app.use(express.json())
+  app.use(cors())
 
   // routes
   app.use(userRoutes)
