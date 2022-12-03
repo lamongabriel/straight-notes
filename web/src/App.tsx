@@ -1,3 +1,12 @@
+import { ChakraProvider } from '@chakra-ui/react'
+import { Header } from './components/Header'
+
+import './styles/global.css'
+
 export function App () {
-  return <h1>Hello straight-notes</h1>
+  return (
+    <ChakraProvider>
+      <Header />
+    </ChakraProvider>
+  )
 }

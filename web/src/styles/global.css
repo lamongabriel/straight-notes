@@ -16,10 +16,6 @@
   -webkit-font-smoothing: antialiased;
 }
 
-img{
-  width: 100%;
-}
-
 footer, header, nav, section, main{
   display: block;
 }
