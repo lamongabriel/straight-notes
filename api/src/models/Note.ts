@@ -22,4 +22,6 @@ const ModelSchema = new Schema<INote>({
   }
 })
 
+ModelSchema.index({ title: 'text', body: 'text' })
+
 export default model<INote>('Note', ModelSchema)

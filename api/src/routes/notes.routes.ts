@@ -7,10 +7,12 @@ import { listNotesByUserId } from '../useCases/note/listNotesByUserId'
 import { listNoteById } from '../useCases/note/listNoteById'
 import { updateNote } from '../useCases/note/updateNote'
 import { deleteNote } from '../useCases/note/deleteNote'
+import { searchNote } from '../useCases/note/searchNote'
 
 const routes = Router()
 
 routes.get('/notes', withAuth, listNotesByUserId)
+routes.get('/notes/search', withAuth, searchNote)
 routes.get('/notes/:id', withAuth, listNoteById)
 
 routes.post('/notes', withAuth, createNote)
