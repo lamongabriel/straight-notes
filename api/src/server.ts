@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { connectToMongo } from './database/mongo'
 
 import userRoutes from './routes/user.routes'
+import notesRoutes from './routes/notes.routes'
 
 dotenv.config()
 
@@ -16,6 +17,7 @@ async function bootstrap () {
 
   // routes
   app.use(userRoutes)
+  app.use(notesRoutes)
 
   app.use((req, res) => {
     res.sendStatus(404)

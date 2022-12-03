@@ -17,7 +17,9 @@ export async function withAuth (req: Request, res: Response, next: NextFunction)
     const { authorization } = req.headers
 
     if (!authorization) {
-      return res.sendStatus(403)
+      return res.status(403).json({
+        message: 'Forbidden: no authorization token was provided.'
+      })
     }
 
     const token = authorization.replace('Bearer', '').trim()
