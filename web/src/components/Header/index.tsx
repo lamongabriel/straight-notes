@@ -19,41 +19,47 @@ import {
 import { List } from 'phosphor-react'
 
 interface HeaderProps {
-  primary?: boolean
+  loggedIn?: boolean
 }
 
-export function Header ({ primary = false }: HeaderProps) {
+export function Header ({ loggedIn = false }: HeaderProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   return (
     <>
-      <Box bgColor={primary ? 'purple.700' : 'white'} boxShadow='lg' borderBottom={primary ? 'none' : 'solid 1px #ccc'}>
+      <Box
+        bgColor={loggedIn ? 'purple.700' : 'white'}
+        boxShadow='lg'
+        borderBottom={loggedIn ? 'none' : 'solid 1px #ccc'}
+        height='70px'
+      >
         <Container
           py={4}
-          maxW='full'
+          maxW='8xl'
           flexDir='row'
           display='flex'
           gap={8}
           alignItems='center'
+          height='full'
         >
 
-          {primary && <Box>
+          {loggedIn && <Box>
             <Button colorScheme='whiteAlpha' onClick={onOpen} variant='ghost'>
               <List size={24} color='#fff' />
             </Button>
           </Box>}
 
-          <Box flex={1} maxH='60px'>
-            <Image w='130px' src={primary ? logoWhite : logoColor} alt='Straight notes logo'/>
+          <Box flex={1}>
+            <Image w='130px' src={loggedIn ? logoWhite : logoColor} alt='Straight notes logo'/>
           </Box>
 
           <Box>
-            {!primary &&
+            {!loggedIn &&
               <HStack>
-                <Button colorScheme='purple' onClick={onOpen} variant='ghost'>
+                <Button colorScheme='purple' variant='ghost'>
                   Login
                 </Button>
-                <Button colorScheme='purple' onClick={onOpen} variant='solid'>
+                <Button colorScheme='purple' variant='solid'>
                   Sign up
                 </Button>
               </HStack>
