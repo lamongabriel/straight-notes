@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import { toast } from 'react-toastify'
 import { Link as RouterLink } from 'react-router-dom'
 
-import { UserServices } from '../../../services/user'
+import { useAuth } from '../../../hooks/useAuth'
 
 import {
   Box,
@@ -23,6 +22,8 @@ export function RegisterForm () {
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
 
+  const { register } = useAuth()
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -37,13 +38,8 @@ export function RegisterForm () {
     event.preventDefault()
     setIsLoading(true)
 
-    const userRegistered = await UserServices.register(formData)
-    if (userRegistered.ok) {
-      toast.success('Thank you for joining us! redirecting...')
-    } else {
-      toast.error(userRegistered.message)
-      setIsLoading(false)
-    }
+    await register(formData)
+    setIsLoading(false)
   }
 
   return (

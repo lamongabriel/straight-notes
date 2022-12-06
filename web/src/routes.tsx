@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
+import { ProtectedRoutes } from './components/auth/ProtectedRoutes'
+import { Loading } from './components/Loading'
 
 import { Home } from './screens/Home'
 
@@ -11,6 +13,11 @@ export function Router () {
       <Route path='/' element={<Home />} />
       <Route path='/register' element={<Register />} />
       <Route path='/login' element={<Login />} />
+
+      <Route element={<ProtectedRoutes />}>
+        <Route path='/test' element={<Loading />}/>
+      </Route>
+
     </Routes>
   )
 }
