@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 
+import { toast } from 'react-toastify'
+
+import { UserServices } from '../../../services/user'
+
 import {
   Box,
   FormControl,
@@ -29,8 +33,17 @@ export function RegisterForm () {
     setFormData({ ...formData, [event.currentTarget.name]: event.currentTarget.value })
   }
 
-  function handleSubmit () {
+  async function handleSubmit (event: React.FormEvent) {
+    event.preventDefault()
     setIsLoading(true)
+
+    const userRegistered = await UserServices.register(formData)
+    if (userRegistered.ok) {
+      toast.success('Thank you for joining us! redirecting...')
+    } else {
+      toast.error(userRegistered.message)
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -41,7 +54,7 @@ export function RegisterForm () {
       boxShadow={'lg'}
       p={8}
     >
-      <Stack spacing={4}>
+      <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} onSubmit={handleSubmit}>
         <FormControl id="name" isRequired>
           <FormLabel>Your name</FormLabel>
           <Input
@@ -51,6 +64,8 @@ export function RegisterForm () {
             focusBorderColor='black'
             onChange={handleFormDataChange}
             value={formData.name}
+            autoComplete='username'
+            disabled={isLoading}
           />
         </FormControl>
         <FormControl id="email" isRequired>
@@ -62,6 +77,8 @@ export function RegisterForm () {
             focusBorderColor='black'
             onChange={handleFormDataChange}
             value={formData.email}
+            autoComplete='email'
+            disabled={isLoading}
           />
         </FormControl>
         <FormControl id="password" isRequired>
@@ -74,12 +91,15 @@ export function RegisterForm () {
               focusBorderColor='black'
               onChange={handleFormDataChange}
               value={formData.password}
+              autoComplete='current-password'
+              disabled={isLoading}
             />
             <InputRightElement h={'full'}>
               <Button
                 variant={'ghost'}
                 onClick={() => setShowPassword((showPassword) => !showPassword)}
                 style={{ padding: 0 }}
+                disabled={isLoading}
               >
                 {showPassword ? <Eye size={18} /> : <EyeSlash size={18} />}
               </Button>
@@ -92,7 +112,7 @@ export function RegisterForm () {
             size="lg"
             colorScheme='purple'
             isLoading={isLoading}
-            onClick={handleSubmit}
+            type='submit'
           >
             Sign up
           </Button>
@@ -102,7 +122,7 @@ export function RegisterForm () {
             Already a user? <Link color={'blue.400'}>Login</Link>
           </Text>
         </Stack>
-      </Stack>
+      </form>
     </Box>
   )
 }
