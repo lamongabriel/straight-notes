@@ -3,7 +3,7 @@ import { createContext, ReactNode, useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { Loading } from '../components/Loading'
 import { api } from '../services/api'
-
+import { Navigate } from 'react-router-dom'
 interface UserLoginParams {
   email: string
   password: string
@@ -21,6 +21,7 @@ interface AuthContextProps {
 
   login: (data: UserLoginParams) => Promise<void>
   register: (data: UserRegisterParams) => Promise<void>
+  logout: () => JSX.Element
 }
 
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
@@ -80,6 +81,13 @@ export function AuthProvider ({ children }: AuthProviderProps) {
     }
   }
 
+  function handleLogout () {
+    setAuthenticated(false)
+    localStorage.removeItem('straightnotes@token')
+    api.defaults.headers.Authorization = null
+    return <Navigate to='/' />
+  }
+
   if (isLoading) {
     return <Loading />
   }
@@ -89,7 +97,8 @@ export function AuthProvider ({ children }: AuthProviderProps) {
         {
           authenticated,
           login: handleLogin,
-          register: handleRegister
+          register: handleRegister,
+          logout: handleLogout
         }
       }
     >
