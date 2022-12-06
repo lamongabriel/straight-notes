@@ -35,9 +35,6 @@ export function Home () {
             Straight notes let's you create your notes and safely store then in the cloud for you to access when you want.
           </Text>
           <Text color='white'>
-            Safe, reliably and always on-line, access in your computer and edit then in your mobile phone, we support every browser and every phone.
-          </Text>
-          <Text color='white'>
             It's free! just create your account and start using it, we will never bill you anything.
           </Text>
           <Button color='white' variant='outline' size='lg' border='2px' _hover={{ bg: 'white', color: 'purple.700' }}>
