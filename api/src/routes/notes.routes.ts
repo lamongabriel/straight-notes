@@ -11,14 +11,14 @@ import { searchNote } from '../useCases/note/searchNote'
 
 const routes = Router()
 
-routes.get('/notes', withAuth, listNotesByUserId)
-routes.get('/notes/search', withAuth, searchNote)
-routes.get('/notes/:id', withAuth, listNoteById)
+routes.get('/', withAuth, listNotesByUserId)
+routes.get('/search', withAuth, searchNote)
+routes.get('/:id', withAuth, listNoteById)
 
-routes.post('/notes', withAuth, createNote)
+routes.post('/', withAuth, createNote)
 
-routes.put('/notes/:id', withAuth, updateNote)
+routes.put('/:id', withAuth, updateNote)
 
-routes.delete('/notes/:id', withAuth, deleteNote)
+routes.delete('/:id', withAuth, deleteNote)
 
 export default routes

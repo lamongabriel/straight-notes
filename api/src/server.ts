@@ -18,8 +18,8 @@ async function bootstrap () {
   app.use(cors())
 
   // routes
-  app.use(userRoutes)
-  app.use(notesRoutes)
+  app.use('/users', userRoutes)
+  app.use('/notes', notesRoutes)
 
   app.use((req, res) => {
     res.sendStatus(404)
