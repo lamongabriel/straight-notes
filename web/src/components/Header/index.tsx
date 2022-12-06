@@ -4,13 +4,6 @@ import logoColor from '../../assets/images/logo.png'
 import {
   Box,
   Container,
-  Drawer,
-  DrawerBody,
-  DrawerHeader,
-  DrawerOverlay,
-  DrawerContent,
-  DrawerCloseButton,
-  useDisclosure,
   Button,
   Image,
   HStack
@@ -18,14 +11,16 @@ import {
 
 import { List } from 'phosphor-react'
 import { Link } from 'react-router-dom'
+import { HeaderDrawer } from '../HeaderDrawer'
 
 interface HeaderProps {
   loggedIn?: boolean
+  isOpen?: boolean
+  onOpen?: () => void
+  onClose?: () => void
 }
 
-export function Header ({ loggedIn = false }: HeaderProps) {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-
+export function Header ({ loggedIn = false, isOpen = false, onClose, onOpen }: HeaderProps) {
   return (
     <>
       <Box
@@ -69,30 +64,9 @@ export function Header ({ loggedIn = false }: HeaderProps) {
           </Box>
         </Container>
       </Box>
-
-      <HeaderDrawer isOpen={isOpen} onClose={onClose} />
+      {onClose &&
+        <HeaderDrawer isOpen={isOpen} onClose={onClose} />
+      }
     </>
-  )
-}
-
-interface HeaderDrawerProps {
-  isOpen: boolean
-  onClose: () => void
-}
-
-function HeaderDrawer ({ isOpen, onClose }: HeaderDrawerProps) {
-  return (
-    <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
-      <DrawerOverlay />
-      <DrawerContent>
-        <DrawerCloseButton />
-        <DrawerHeader borderBottomWidth='1px'>Basic Drawer</DrawerHeader>
-        <DrawerBody>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </DrawerBody>
-      </DrawerContent>
-    </Drawer>
   )
 }

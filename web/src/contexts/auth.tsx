@@ -3,7 +3,7 @@ import { createContext, ReactNode, useState, useEffect } from 'react'
 import { toast } from 'react-toastify'
 import { Loading } from '../components/Loading'
 import { api } from '../services/api'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 interface UserLoginParams {
   email: string
   password: string
@@ -21,7 +21,7 @@ interface AuthContextProps {
 
   login: (data: UserLoginParams) => Promise<void>
   register: (data: UserRegisterParams) => Promise<void>
-  logout: () => JSX.Element
+  logout: () => void
 }
 
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps)
@@ -33,11 +33,12 @@ interface AuthProviderProps {
 export function AuthProvider ({ children }: AuthProviderProps) {
   const [authenticated, setAuthenticated] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const navigate = useNavigate()
 
   const defaultErrorMessage = 'Sorry, we could not process your request now, please try again later.'
 
   useEffect(() => {
-    const token = localStorage.getItem('straightnotes')
+    const token = localStorage.getItem('straightnotes@token')
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token) as string}`
       setAuthenticated(true)
@@ -58,6 +59,8 @@ export function AuthProvider ({ children }: AuthProviderProps) {
       setAuthenticated(true)
 
       toast.success('Welcome back! redirecting you...')
+
+      return navigate('/notes')
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message)
@@ -72,6 +75,7 @@ export function AuthProvider ({ children }: AuthProviderProps) {
       await api.post('/users/register', params)
 
       toast.success('Thank you for joining us! redirecting...')
+      return navigate('/login')
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message)
@@ -85,7 +89,7 @@ export function AuthProvider ({ children }: AuthProviderProps) {
     setAuthenticated(false)
     localStorage.removeItem('straightnotes@token')
     api.defaults.headers.Authorization = null
-    return <Navigate to='/' />
+    return navigate('/')
   }
 
   if (isLoading) {
