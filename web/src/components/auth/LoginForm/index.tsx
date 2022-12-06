@@ -1,3 +1,9 @@
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import { Link as RouterLink } from 'react-router-dom'
+
+import { UserServices } from '../../../services/user'
+
 import {
   Box,
   FormControl,
@@ -7,34 +13,102 @@ import {
   Stack,
   Link,
   Button,
-  Text
+  Text,
+  InputGroup,
+  InputRightElement
 } from '@chakra-ui/react'
-
-import { Link as RouterLink } from 'react-router-dom'
+import { Eye, EyeSlash } from 'phosphor-react'
 
 export function LoginForm () {
+  const [showPassword, setShowPassword] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
+
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    rememberMe: true
+  })
+
+  function handleFormDataChange (event: React.FormEvent<HTMLInputElement>) {
+    setFormData({ ...formData, [event.currentTarget.name]: event.currentTarget.value })
+  }
+
+  async function handleSubmit (event: React.FormEvent) {
+    event.preventDefault()
+    setIsLoading(true)
+
+    const isUserLogged = await UserServices.login(formData)
+    if (isUserLogged.ok) {
+      toast.success('Welcome back! redirecting you...')
+    } else {
+      toast.error(isUserLogged.message)
+      setIsLoading(false)
+    }
+  }
+
   return (
     <Box
+      className='login__form'
       rounded={'lg'}
       bg={'white'}
       boxShadow={'lg'}
       p={8}
     >
-      <Stack spacing={4}>
-        <FormControl id="email">
+      <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} onSubmit={handleSubmit}>
+        <FormControl id="email" isRequired>
           <FormLabel>Email address</FormLabel>
-          <Input type="email" />
+          <Input
+            name='email'
+            type="email"
+            required
+            focusBorderColor='black'
+            onChange={handleFormDataChange}
+            value={formData.email}
+            autoComplete='email'
+            disabled={isLoading}
+          />
         </FormControl>
-        <FormControl id="password">
+        <FormControl id="password" isRequired>
           <FormLabel>Password</FormLabel>
-          <Input type="password" />
+          <InputGroup>
+            <Input
+              name='password'
+              type={showPassword ? 'text' : 'password'}
+              required
+              focusBorderColor='black'
+              onChange={handleFormDataChange}
+              value={formData.password}
+              autoComplete='current-password'
+              disabled={isLoading}
+            />
+            <InputRightElement h={'full'}>
+              <Button
+                variant={'ghost'}
+                onClick={() => setShowPassword((showPassword) => !showPassword)}
+                style={{ padding: 0 }}
+                disabled={isLoading}
+              >
+                {showPassword ? <Eye size={18} /> : <EyeSlash size={18} />}
+              </Button>
+            </InputRightElement>
+          </InputGroup>
         </FormControl>
         <Stack spacing={10}>
           <Stack
             direction={{ base: 'column', sm: 'row' }}
             align={'start'}
-            justify={'space-between'}>
-            <Checkbox>Remember me</Checkbox>
+            justify={'space-between'}
+          >
+            <Checkbox
+              checked={formData.rememberMe}
+              name='rememberMe'
+              defaultChecked
+              onChange={(e) => setFormData(prev => ({ ...prev, rememberMe: e.currentTarget.checked }))}
+              autoComplete='remember-me'
+              disabled={isLoading}
+            >
+              Remember me
+            </Checkbox>
             <Link color={'blue.400'}>Forgot password?</Link>
           </Stack>
           <Button
@@ -42,11 +116,12 @@ export function LoginForm () {
             loadingText="Loading"
             size="lg"
             type='submit'
+            isLoading={isLoading}
           >
             Sign in
           </Button>
         </Stack>
-      </Stack>
+      </form>
       <Stack pt={6}>
         <Text align={'center'}>
           Don't have an account? <Link to='/register' as={RouterLink} color={'blue.400'} >Register</Link>

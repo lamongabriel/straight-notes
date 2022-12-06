@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-
 import { toast } from 'react-toastify'
+import { Link as RouterLink } from 'react-router-dom'
 
 import { UserServices } from '../../../services/user'
 
@@ -16,8 +16,6 @@ import {
   Link,
   Text
 } from '@chakra-ui/react'
-
-import { Link as RouterLink } from 'react-router-dom'
 
 import { Eye, EyeSlash } from 'phosphor-react'
 
