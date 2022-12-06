@@ -30,7 +30,7 @@ export function Home () {
         w='full'
       >
         <Stack spacing={6} maxW='500px' order={{ base: 1, lg: 0 }}>
-          <Heading color='white' fontSize={{ base: '4xl', lg: '5xl' }}>
+          <Heading color='white' fontSize={{ base: '3xl', lg: '5xl' }}>
             Create notes easily and access then when you need on the cloud.
           </Heading>
           <Text color='white'>
