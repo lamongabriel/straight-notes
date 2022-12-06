@@ -17,6 +17,8 @@ import {
   Text
 } from '@chakra-ui/react'
 
+import { Link as RouterLink } from 'react-router-dom'
+
 import { Eye, EyeSlash } from 'phosphor-react'
 
 export function RegisterForm () {
@@ -119,7 +121,7 @@ export function RegisterForm () {
         </Stack>
         <Stack pt={6}>
           <Text align={'center'}>
-            Already a user? <Link color={'blue.400'}>Login</Link>
+            Already a user? <Link to='/login' as={RouterLink} color={'blue.400'}>Login</Link>
           </Text>
         </Stack>
       </form>
