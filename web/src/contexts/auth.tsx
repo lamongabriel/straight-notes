@@ -42,6 +42,8 @@ export function AuthProvider ({ children }: AuthProviderProps) {
     if (token) {
       api.defaults.headers.Authorization = `Bearer ${JSON.parse(token) as string}`
       setAuthenticated(true)
+      setIsLoading(false)
+      return navigate('/notes')
     }
     setIsLoading(false)
   }, [])

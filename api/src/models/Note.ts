@@ -20,6 +20,9 @@ const ModelSchema = new Schema<INote>({
     required: true,
     ref: 'User'
   }
+},
+{
+  timestamps: true
 })
 
 ModelSchema.index({ title: 'text', body: 'text' })
