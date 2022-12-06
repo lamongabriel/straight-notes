@@ -17,6 +17,7 @@ import {
 } from '@chakra-ui/react'
 
 import { List } from 'phosphor-react'
+import { Link } from 'react-router-dom'
 
 interface HeaderProps {
   loggedIn?: boolean
@@ -56,10 +57,10 @@ export function Header ({ loggedIn = false }: HeaderProps) {
           <Box>
             {!loggedIn &&
               <HStack>
-                <Button colorScheme='purple' variant='ghost'>
+                <Button as={Link} to='/login' colorScheme='purple' variant='ghost'>
                   Login
                 </Button>
-                <Button colorScheme='purple' variant='solid'>
+                <Button as={Link} to='/register' colorScheme='purple' variant='solid'>
                   Sign up
                 </Button>
               </HStack>

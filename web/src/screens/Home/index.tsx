@@ -10,6 +10,8 @@ import {
   Button
 } from '@chakra-ui/react'
 
+import { Link } from 'react-router-dom'
+
 import presentation from '../../assets/images/presentation.png'
 
 export function Home () {
@@ -37,7 +39,7 @@ export function Home () {
           <Text color='white'>
             It's free! just create your account and start using it, we will never bill you anything.
           </Text>
-          <Button color='white' variant='outline' size='lg' border='2px' _hover={{ bg: 'white', color: 'purple.700' }}>
+          <Button as={Link} to='/register' color='white' variant='outline' size='lg' border='2px' _hover={{ bg: 'white', color: 'purple.700' }}>
             Register for free now
           </Button>
         </Stack>
