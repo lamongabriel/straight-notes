@@ -25,7 +25,7 @@ export function Register () {
             <Image src={logo} />
           </Box>
           <Heading color={'white'} fontSize={'4xl'} textAlign={'center'}>
-            Register
+            Your notes on the cloud
           </Heading>
           <Text fontSize={'lg'} color={'white'}>
             Create, edit and view you notes anywhere in the world
