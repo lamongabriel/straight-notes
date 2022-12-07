@@ -12,15 +12,29 @@ import {
 import { List } from 'phosphor-react'
 import { Link } from 'react-router-dom'
 import { HeaderDrawer } from '../HeaderDrawer'
+import { Note } from '../../types/note'
 
 interface HeaderProps {
   loggedIn?: boolean
+
   isOpen?: boolean
   onOpen?: () => void
   onClose?: () => void
+
+  currentNote: Note
+  setCurrentNote: (note: Note) => void
 }
 
-export function Header ({ loggedIn = false, isOpen = false, onClose, onOpen }: HeaderProps) {
+export function Header (
+  {
+    loggedIn = false,
+    isOpen = false,
+    onClose,
+    onOpen,
+    currentNote,
+    setCurrentNote
+  }: HeaderProps
+) {
   return (
     <>
       <Box
@@ -65,7 +79,7 @@ export function Header ({ loggedIn = false, isOpen = false, onClose, onOpen }: H
         </Container>
       </Box>
       {onClose &&
-        <HeaderDrawer isOpen={isOpen} onClose={onClose} />
+        <HeaderDrawer isOpen={isOpen} onClose={onClose} currentNote={currentNote} setCurrentNote={setCurrentNote}/>
       }
     </>
   )

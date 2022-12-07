@@ -33,11 +33,12 @@ import { Trash } from 'phosphor-react'
 interface HeaderDrawerProps {
   isOpen: boolean
   onClose: () => void
+  currentNote: Note
+  setCurrentNote: (note: Note) => void
 }
 
-export function HeaderDrawer ({ isOpen, onClose }: HeaderDrawerProps) {
+export function HeaderDrawer ({ isOpen, onClose, currentNote, setCurrentNote }: HeaderDrawerProps) {
   const [notes, setNotes] = useState<Note[]>([])
-  const [currentNote, setCurrentNote] = useState<Note>({} as Note)
 
   useEffect(() => {
     fetchNotes()
