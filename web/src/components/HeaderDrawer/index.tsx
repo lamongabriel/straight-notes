@@ -22,7 +22,8 @@ import {
   Box,
   Text,
   Flex,
-  Badge
+  Badge,
+  Button
 } from '@chakra-ui/react'
 
 import { Note } from '../../types/note'
@@ -36,10 +37,27 @@ interface HeaderDrawerProps {
 
 export function HeaderDrawer ({ isOpen, onClose }: HeaderDrawerProps) {
   const [notes, setNotes] = useState<Note[]>([])
+  const [currentNote, setCurrentNote] = useState<Note>({} as Note)
 
   useEffect(() => {
-    NotesServices.fetchNotes().then(response => setNotes(response.data))
+    fetchNotes()
   }, [])
+
+  async function fetchNotes () {
+    const { data } = await NotesServices.listNotes()
+    const sortedNotes = data.sort(
+      (a: Note, b: Note) => (
+        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+      )
+    )
+    setNotes(sortedNotes)
+    setCurrentNote(sortedNotes[0])
+  }
+
+  async function createNote () {
+    await NotesServices.createNote()
+    fetchNotes()
+  }
 
   return (
     <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
@@ -54,51 +72,44 @@ export function HeaderDrawer ({ isOpen, onClose }: HeaderDrawerProps) {
               <Input type='search' />
             </FormControl>
 
-            <Text px={4} fontWeight='medium'>{notes.length} Notes</Text>
+            <Flex justifyContent='space-between' alignItems='center' px={4}>
+              <Text fontWeight='medium'>{notes.length} Notes</Text>
+              <Button size='sm' colorScheme='purple' variant='solid' onClick={createNote}>Note +</Button>
+            </Flex>
 
-            <ListNotes notes={notes}/>
+            <Accordion>
+              {
+                notes.map(note => (
+                  <AccordionItem key={note._id}>
+                    <h2>
+                      <AccordionButton>
+                        <Box flex='1' textAlign='left'>
+                          <Text
+                            noOfLines={1}
+                            fontWeight='bold'
+                            color={currentNote._id === note._id ? 'purple.500' : 'inherit'}
+                          >
+                            {note.title}
+                          </Text>
+                        </Box>
+                        <AccordionIcon />
+                      </AccordionButton>
+                    </h2>
+                    <AccordionPanel pb={4} onClick={() => setCurrentNote(note)} cursor='pointer'>
+                      <Text noOfLines={3} mb={4}>{note.body}</Text>
+                      <Flex justifyContent='space-between'>
+                        <Badge colorScheme='green'>Updated {moment(note.updatedAt).fromNow()}</Badge>
+                        <Trash />
+                      </Flex>
+                    </AccordionPanel>
+                  </AccordionItem>
+                ))
+              }
+            </Accordion>
 
           </Stack>
         </DrawerBody>
       </DrawerContent>
     </Drawer>
-  )
-}
-
-interface ListNotesProps {
-  notes: Note[]
-}
-
-export function ListNotes ({ notes }: ListNotesProps) {
-  const [selectedNote, setSelectedNote] = useState('')
-
-  const sortedNotes = notes.sort(
-    (a, b) => (
-      new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-    )
-  )
-
-  return (
-    <Accordion>
-      {sortedNotes.map(note => (
-        <AccordionItem key={note._id} onClick={() => setSelectedNote(note._id)}>
-          <h2>
-            <AccordionButton>
-              <Box flex='1' textAlign='left'>
-                <Text noOfLines={1} fontWeight='bold'>{note.title}</Text>
-              </Box>
-              <AccordionIcon />
-            </AccordionButton>
-          </h2>
-          <AccordionPanel pb={4}>
-            <Text noOfLines={2} mb={4}>{note.body}</Text>
-            <Flex justifyContent='space-between'>
-              <Badge colorScheme='green'>Updated {moment(note.updatedAt).fromNow()}</Badge>
-              <Trash />
-            </Flex>
-          </AccordionPanel>
-        </AccordionItem>
-      ))}
-    </Accordion>
   )
 }
