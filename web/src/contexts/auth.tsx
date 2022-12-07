@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { Loading } from '../components/Loading'
 import { api } from '../services/api'
 import { useNavigate } from 'react-router-dom'
+import { getAuthorization } from '../utils/getAuthorization'
 interface UserLoginParams {
   email: string
   password: string
@@ -38,9 +39,9 @@ export function AuthProvider ({ children }: AuthProviderProps) {
   const defaultErrorMessage = 'Sorry, we could not process your request now, please try again later.'
 
   useEffect(() => {
-    const token = localStorage.getItem('straightnotes@token')
-    if (token) {
-      api.defaults.headers.Authorization = `Bearer ${JSON.parse(token) as string}`
+    const Authorization = getAuthorization()
+    if (Authorization) {
+      api.defaults.headers.Authorization = Authorization
       setAuthenticated(true)
       setIsLoading(false)
       return navigate('/notes')

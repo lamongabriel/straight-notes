@@ -1,7 +1,7 @@
 import { api } from './api'
+import { getAuthorization } from '../utils/getAuthorization'
 
-const token = localStorage.getItem('straightnotes@token') as string
-const Authorization = `Bearer ${JSON.parse(token) as string}`
+const Authorization = getAuthorization()
 
 export const NotesServices = {
 
