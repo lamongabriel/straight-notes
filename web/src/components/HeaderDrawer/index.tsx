@@ -59,6 +59,11 @@ export function HeaderDrawer ({ isOpen, onClose }: HeaderDrawerProps) {
     fetchNotes()
   }
 
+  async function deleteNote (id: string) {
+    await NotesServices.deleteNote(id)
+    fetchNotes()
+  }
+
   return (
     <Drawer placement='left' onClose={onClose} isOpen={isOpen}>
       <DrawerOverlay />
@@ -99,7 +104,9 @@ export function HeaderDrawer ({ isOpen, onClose }: HeaderDrawerProps) {
                       <Text noOfLines={3} mb={4}>{note.body}</Text>
                       <Flex justifyContent='space-between'>
                         <Badge colorScheme='green'>Updated {moment(note.updatedAt).fromNow()}</Badge>
-                        <Trash />
+                        <Box onClick={async () => await deleteNote(note._id)} _hover={{ transform: 'scale(1.3)' }} transition='200ms'>
+                          <Trash />
+                        </Box>
                       </Flex>
                     </AccordionPanel>
                   </AccordionItem>

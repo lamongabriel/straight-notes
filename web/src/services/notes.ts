@@ -19,5 +19,13 @@ export const NotesServices = {
         Authorization
       }
     })
+  },
+
+  deleteNote: async (id: string) => {
+    return await api.delete(`/notes/${id}`, {
+      headers: {
+        Authorization
+      }
+    })
   }
 }
