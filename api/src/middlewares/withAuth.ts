@@ -5,7 +5,7 @@ import User from '../models/User'
 
 dotenv.config()
 
-interface TokenPayload {
+export interface TokenPayload {
   _id: string
   email: string
   iat: number
