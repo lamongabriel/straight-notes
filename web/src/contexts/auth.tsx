@@ -60,7 +60,7 @@ export function AuthProvider ({ children }: AuthProviderProps) {
 
       setAuthenticated(true)
 
-      toast.success('Welcome back! redirecting you...')
+      toast.success('Welcome back!')
 
       return navigate('/notes')
     } catch (error) {
@@ -76,7 +76,7 @@ export function AuthProvider ({ children }: AuthProviderProps) {
     try {
       await api.post('/users/register', params)
 
-      toast.success('Thank you for joining us! redirecting...')
+      toast.success('Thanks for joining us! Please log-in now.')
       return navigate('/login')
     } catch (error) {
       if (error instanceof AxiosError) {
