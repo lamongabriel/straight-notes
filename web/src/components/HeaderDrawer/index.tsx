@@ -101,7 +101,7 @@ export function HeaderDrawer ({ isOpen, onClose, currentNote, setCurrentNote }: 
                         <AccordionIcon />
                       </AccordionButton>
                     </h2>
-                    <AccordionPanel pb={4} onClick={() => setCurrentNote(note)} cursor='pointer'>
+                    <AccordionPanel pb={4} onClick={() => { setCurrentNote(note); onClose() }} cursor='pointer'>
                       <Text noOfLines={3} mb={4}>{note.body}</Text>
                       <Flex justifyContent='space-between'>
                         <Badge colorScheme='green'>Updated {moment(note.updatedAt).fromNow()}</Badge>

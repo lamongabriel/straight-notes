@@ -4,6 +4,10 @@ import { Note } from '../../types/note'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
+import {
+  Container
+} from '@chakra-ui/react'
+
 interface NotesEditorProps {
   note: Note
 }
@@ -35,6 +39,8 @@ export function NotesEditor (props: NotesEditorProps) {
   }
 
   return (
-    <ReactQuill value={currentContent} modules={modules}/>
+    <Container maxW='8xl'>
+      <ReactQuill value={currentContent} modules={modules}/>
+    </Container>
   )
 }

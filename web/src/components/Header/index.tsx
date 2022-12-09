@@ -9,7 +9,7 @@ import {
   HStack
 } from '@chakra-ui/react'
 
-import { List } from 'phosphor-react'
+import { List, User } from 'phosphor-react'
 import { Link } from 'react-router-dom'
 import { HeaderDrawer } from '../HeaderDrawer'
 import { Note } from '../../types/note'
@@ -50,20 +50,20 @@ export function Header (
           display='flex'
           gap={8}
           alignItems='center'
+          justifyContent='space-between'
           height='full'
         >
 
-          {loggedIn && <Box>
-            <Button colorScheme='whiteAlpha' onClick={onOpen} variant='ghost'>
-              <List size={24} color='#fff' />
-            </Button>
-          </Box>}
-
-          <Box flex={1}>
-            <Image w='130px' src={loggedIn ? logoWhite : logoColor} alt='Straight notes logo'/>
+          <Box display='flex' flexDirection='row' alignItems='center' gap={6}>
+            <Image w='120px' src={loggedIn ? logoWhite : logoColor} alt='Straight notes logo'/>
+            {loggedIn &&
+              <Button colorScheme='whiteAlpha' onClick={onOpen} variant='ghost'>
+                <List size={32} color='#fff' />
+              </Button>
+            }
           </Box>
 
-          <Box>
+          <Box alignSelf='flex-end'>
             {!loggedIn &&
               <HStack>
                 <Button as={Link} to='/login' colorScheme='purple' variant='ghost'>
@@ -74,8 +74,11 @@ export function Header (
                 </Button>
               </HStack>
             }
-
+            <Button colorScheme='whiteAlpha' variant='ghost'>
+              <User size={32} color='#fff' />
+            </Button>
           </Box>
+
         </Container>
       </Box>
       {onClose &&
