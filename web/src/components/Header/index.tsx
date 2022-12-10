@@ -64,19 +64,19 @@ export function Header (
           </Box>
 
           <Box alignSelf='flex-end'>
-            {!loggedIn &&
-              <HStack>
-                <Button as={Link} to='/login' colorScheme='purple' variant='ghost'>
-                  Login
+            {loggedIn
+              ? <Button colorScheme='whiteAlpha' variant='ghost'>
+                  <User size={32} color='#fff' />
                 </Button>
-                <Button as={Link} to='/register' colorScheme='purple' variant='solid'>
-                  Sign up
-                </Button>
-              </HStack>
+              : <HStack>
+                  <Button as={Link} to='/login' colorScheme='purple' variant='ghost'>
+                    Login
+                  </Button>
+                  <Button as={Link} to='/register' colorScheme='purple' variant='solid'>
+                    Sign up
+                  </Button>
+                </HStack>
             }
-            <Button colorScheme='whiteAlpha' variant='ghost'>
-              <User size={32} color='#fff' />
-            </Button>
           </Box>
 
         </Container>
