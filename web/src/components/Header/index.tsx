@@ -68,7 +68,7 @@ export function Header (
               alt='Straight notes logo'
             />
             {loggedIn &&
-              <Button colorScheme='whiteAlpha' onClick={onOpen} variant='ghost'>
+              <Button colorScheme='whiteAlpha' p={0} onClick={onOpen} variant='ghost'>
                 <List size={30} color='#fff' />
               </Button>
             }
