@@ -6,7 +6,13 @@ import {
   Container,
   Button,
   Image,
-  HStack
+  HStack,
+  MenuList,
+  Center,
+  MenuDivider,
+  MenuItem,
+  Menu,
+  MenuButton
 } from '@chakra-ui/react'
 
 import { List, User } from 'phosphor-react'
@@ -41,7 +47,7 @@ export function Header (
         bgColor={loggedIn ? 'purple.700' : 'white'}
         boxShadow='lg'
         borderBottom={loggedIn ? 'none' : 'solid 1px #ccc'}
-        height='70px'
+        height={{ base: '60px', md: '70px' }}
       >
         <Container
           py={4}
@@ -55,34 +61,70 @@ export function Header (
         >
 
           <Box display='flex' flexDirection='row' alignItems='center' gap={6}>
-            <Image w='120px' src={loggedIn ? logoWhite : logoColor} alt='Straight notes logo'/>
+            <Image
+              display={loggedIn ? { base: 'none', md: 'block' } : 'block'}
+              w={{ base: '100px', md: '120px' }}
+              src={loggedIn ? logoWhite : logoColor}
+              alt='Straight notes logo'
+            />
             {loggedIn &&
               <Button colorScheme='whiteAlpha' onClick={onOpen} variant='ghost'>
-                <List size={32} color='#fff' />
+                <List size={30} color='#fff' />
               </Button>
             }
           </Box>
 
-          <Box alignSelf='flex-end'>
-            {loggedIn
-              ? <Button colorScheme='whiteAlpha' variant='ghost'>
-                  <User size={32} color='#fff' />
-                </Button>
-              : <HStack>
-                  <Button as={Link} to='/login' colorScheme='purple' variant='ghost'>
-                    Login
-                  </Button>
-                  <Button as={Link} to='/register' colorScheme='purple' variant='solid'>
-                    Sign up
-                  </Button>
-                </HStack>
-            }
+          <Box display={loggedIn ? 'flex' : 'none'}>
+            <Image
+              display={{ base: 'block', md: 'none' }}
+              w='100px'
+              src={logoWhite}
+              alt='Straight notes logo'
+            />
           </Box>
 
+          <Box>
+            {loggedIn
+              ? <Menu>
+                  <MenuButton
+                    as={Button}
+                    rounded={'full'}
+                    variant={'link'}
+                    cursor={'pointer'}
+                    display={'flex'}
+                    minW={0}
+                  >
+                    <User color='#fff' size={30} />
+                  </MenuButton>
+                  <MenuList alignItems={'center'}>
+                    <br />
+                    <Center>
+                      <User size={92} />
+                    </Center>
+                    <br />
+                    <Center>
+                      <p>Username</p>
+                    </Center>
+                    <br />
+                    <MenuDivider />
+                    <MenuItem>Account Settings</MenuItem>
+                    <MenuItem>Logout</MenuItem>
+                  </MenuList>
+                </Menu>
+              : <HStack>
+                <Button size={{ base: 'sm', md: 'md' }} as={Link} to='/login' colorScheme='purple' variant='ghost'>
+                  Login
+                </Button>
+                <Button size={{ base: 'sm', md: 'md' }} as={Link} to='/register' colorScheme='purple' variant='solid'>
+                  Sign up
+                </Button>
+              </HStack>
+            }
+          </Box>
         </Container>
       </Box>
       {onClose &&
-        <HeaderDrawer isOpen={isOpen} onClose={onClose} currentNote={currentNote} setCurrentNote={setCurrentNote}/>
+        <HeaderDrawer isOpen={isOpen} onClose={onClose} currentNote={currentNote} setCurrentNote={setCurrentNote} />
       }
     </>
   )

@@ -39,7 +39,7 @@ export function NotesEditor (props: NotesEditorProps) {
   }
 
   return (
-    <Container maxW='8xl'>
+    <Container maxW='8xl' padding='0'>
       <ReactQuill value={currentContent} modules={modules}/>
     </Container>
   )
