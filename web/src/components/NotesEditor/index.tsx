@@ -16,7 +16,7 @@ export function NotesEditor (props: NotesEditorProps) {
   const [currentContent, setCurrentContent] = useState('')
 
   useEffect(() => {
-    setCurrentContent(props.note.body)
+    props.note?.body && setCurrentContent(props.note.body)
   }, [props.note])
 
   const modules = {

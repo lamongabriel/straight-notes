@@ -1,3 +1,7 @@
+import { useAuth } from '../../hooks/useAuth'
+import { Link } from 'react-router-dom'
+import { HeaderDrawer } from '../HeaderDrawer'
+
 import logoWhite from '../../assets/images/logo-white.png'
 import logoColor from '../../assets/images/logo.png'
 
@@ -16,8 +20,7 @@ import {
 } from '@chakra-ui/react'
 
 import { List, User } from 'phosphor-react'
-import { Link } from 'react-router-dom'
-import { HeaderDrawer } from '../HeaderDrawer'
+
 import { Note } from '../../types/note'
 
 interface HeaderProps {
@@ -41,13 +44,15 @@ export function Header (
     setCurrentNote
   }: HeaderProps
 ) {
+  const { logout } = useAuth()
+
   return (
     <>
       <Box
         bgColor={loggedIn ? 'purple.700' : 'white'}
         boxShadow='lg'
         borderBottom={loggedIn ? 'none' : 'solid 1px #ccc'}
-        height={{ base: '60px', md: '70px' }}
+        height={{ base: '63px', md: '70px' }}
       >
         <Container
           py={4}
@@ -77,7 +82,7 @@ export function Header (
           <Box display={loggedIn ? 'flex' : 'none'}>
             <Image
               display={{ base: 'block', md: 'none' }}
-              w='100px'
+              w='105px'
               src={logoWhite}
               alt='Straight notes logo'
             />
@@ -108,11 +113,17 @@ export function Header (
                     <br />
                     <MenuDivider />
                     <MenuItem>Account Settings</MenuItem>
-                    <MenuItem>Logout</MenuItem>
+                    <MenuItem onClick={logout}>Logout</MenuItem>
                   </MenuList>
                 </Menu>
               : <HStack>
-                <Button size={{ base: 'sm', md: 'md' }} as={Link} to='/login' colorScheme='purple' variant='ghost'>
+                <Button
+                  size={{ base: 'sm', md: 'md' }}
+                  as={Link}
+                  to='/login'
+                  colorScheme='purple'
+                  variant='ghost'
+                >
                   Login
                 </Button>
                 <Button size={{ base: 'sm', md: 'md' }} as={Link} to='/register' colorScheme='purple' variant='solid'>
