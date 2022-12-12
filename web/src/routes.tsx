@@ -2,10 +2,11 @@ import { Routes, Route } from 'react-router-dom'
 import { ProtectedRoutes } from './components/auth/ProtectedRoutes'
 
 import { Home } from './screens/Home'
-
 import { Login } from './screens/Login'
-import { Notes } from './screens/Notes'
 import { Register } from './screens/Register'
+
+import { Notes } from './screens/Notes'
+import { Account } from './screens/Account'
 
 export function Router () {
   return (
@@ -16,6 +17,7 @@ export function Router () {
 
       <Route element={<ProtectedRoutes />}>
         <Route path='/notes' element={<Notes />} />
+        <Route path='/account' element={<Account />} />
       </Route>
 
     </Routes>

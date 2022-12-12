@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
 import { HeaderDrawer } from '../HeaderDrawer'
 
@@ -51,6 +52,7 @@ export function HeaderLogged (
   }: HeaderProps
 ) {
   const { logout } = useAuth()
+  const navigate = useNavigate()
 
   return (
     <>
@@ -114,7 +116,7 @@ export function HeaderLogged (
                 </Center>
                 <br />
                 <MenuDivider />
-                <MenuItem>Account Settings</MenuItem>
+                <MenuItem onClick={() => navigate('/account')}>Account Settings</MenuItem>
                 <MenuItem onClick={logout}>Logout</MenuItem>
               </MenuList>
             </Menu>
