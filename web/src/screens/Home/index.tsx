@@ -15,12 +15,13 @@ import { Link } from 'react-router-dom'
 
 import presentation from '../../assets/images/presentation.png'
 import users from '../../assets/images/users.png'
-import { Note } from '../../types/note'
 
 export function Home () {
   return (
     <Box minH='100vh' bg='purple.700' w='full'>
-      <Header currentNote={{} as Note} setCurrentNote={() => {}} />
+
+      <Header />
+
       <Container
         display='flex'
         minH='calc(100vh - 70px)'

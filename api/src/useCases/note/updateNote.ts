@@ -21,16 +21,17 @@ export async function updateNote (req: Request, res: Response) {
     }
 
     if (String(note.author) === String(req.user._id)) {
-      await note.updateOne({
+      const newNote = await Note.findByIdAndUpdate({ _id: id }, {
         $set: {
           title,
           body
         }
       }, {
         new: true,
-        upsert: true
+        upsert: true,
+        returnDocument: 'after'
       })
-      return res.status(200).json({ id, title, body })
+      return res.status(200).json(newNote)
     } else {
       return res.status(403).json({
         message: 'You cannot update a note that is not yours.'

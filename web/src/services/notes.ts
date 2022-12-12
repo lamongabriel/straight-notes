@@ -25,5 +25,13 @@ export const NotesServices = {
         Authorization: getAuthorization()
       }
     })
+  },
+
+  updateNote: async (id: string, params: { title: string, body: string }) => {
+    return await api.put(`/notes/${id}`, params, {
+      headers: {
+        Authorization: getAuthorization()
+      }
+    })
   }
 }

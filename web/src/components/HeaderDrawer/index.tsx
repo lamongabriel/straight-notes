@@ -1,7 +1,4 @@
-import { useEffect, useState } from 'react'
 import moment from 'moment'
-
-import { NotesServices } from '../../services/notes'
 
 import {
   Drawer,
@@ -33,36 +30,29 @@ import { Trash } from 'phosphor-react'
 interface HeaderDrawerProps {
   isOpen: boolean
   onClose: () => void
+
   currentNote: Note
   setCurrentNote: (note: Note) => void
+
+  notes: Note[]
+  createNote: () => void
+  deleteNote: (id: string) => void
 }
 
-export function HeaderDrawer ({ isOpen, onClose, currentNote, setCurrentNote }: HeaderDrawerProps) {
-  const [notes, setNotes] = useState<Note[]>([])
-
-  useEffect(() => {
-    fetchNotes()
-  }, [])
-
-  async function fetchNotes () {
-    const { data } = await NotesServices.listNotes()
-    const sortedNotes = data.sort(
-      (a: Note, b: Note) => (
-        new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-      )
-    )
-    setNotes(sortedNotes)
-    setCurrentNote(sortedNotes[0])
-  }
-
-  async function createNote () {
-    await NotesServices.createNote()
-    fetchNotes()
-  }
-
-  async function deleteNote (id: string) {
-    await NotesServices.deleteNote(id)
-    fetchNotes()
+export function HeaderDrawer (
+  {
+    isOpen,
+    onClose,
+    currentNote,
+    setCurrentNote,
+    notes,
+    createNote,
+    deleteNote
+  }: HeaderDrawerProps
+) {
+  function handleSelectNote (note: Note) {
+    setCurrentNote(note)
+    onClose()
   }
 
   return (
@@ -101,11 +91,15 @@ export function HeaderDrawer ({ isOpen, onClose, currentNote, setCurrentNote }: 
                         <AccordionIcon />
                       </AccordionButton>
                     </h2>
-                    <AccordionPanel pb={4} onClick={() => { setCurrentNote(note); onClose() }} cursor='pointer'>
-                      <Text noOfLines={3} mb={4}>{note.body}</Text>
+                    <AccordionPanel pb={4} onClick={() => handleSelectNote(note)} cursor='pointer'>
+
+                      <Text noOfLines={3} mb={4}>
+                        { note.body.replace(/(<([^>]+)>)/ig, '') }
+                      </Text>
+
                       <Flex justifyContent='space-between'>
                         <Badge colorScheme='green'>Updated {moment(note.updatedAt).fromNow()}</Badge>
-                        <Box onClick={async () => await deleteNote(note._id)} _hover={{ transform: 'scale(1.3)' }} transition='200ms'>
+                        <Box onClick={async () => deleteNote(note._id)} _hover={{ transform: 'scale(1.3)' }} transition='200ms'>
                           <Trash />
                         </Box>
                       </Flex>
