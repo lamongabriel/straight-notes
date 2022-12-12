@@ -7,9 +7,6 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
-  FormControl,
-  FormLabel,
-  Input,
   Stack,
   Accordion,
   AccordionButton,
@@ -26,6 +23,7 @@ import {
 import { Note } from '../../types/note'
 
 import { Trash } from 'phosphor-react'
+import { Search } from '../Search'
 
 interface HeaderDrawerProps {
   isOpen: boolean
@@ -35,8 +33,10 @@ interface HeaderDrawerProps {
   setCurrentNote: (note: Note) => void
 
   notes: Note[]
+  fetchNotes: () => void
   createNote: () => void
   deleteNote: (id: string) => void
+  searchNotes: (query: string) => void
 }
 
 export function HeaderDrawer (
@@ -46,8 +46,10 @@ export function HeaderDrawer (
     currentNote,
     setCurrentNote,
     notes,
+    fetchNotes,
     createNote,
-    deleteNote
+    deleteNote,
+    searchNotes
   }: HeaderDrawerProps
 ) {
   function handleSelectNote (note: Note) {
@@ -63,10 +65,8 @@ export function HeaderDrawer (
         <DrawerHeader borderBottomWidth='1px'>Your notes</DrawerHeader>
         <DrawerBody p={0}>
           <Stack spacing={4}>
-            <FormControl px={4} pt={2}>
-              <FormLabel>Search</FormLabel>
-              <Input type='search' />
-            </FormControl>
+
+            <Search fetchNotes={fetchNotes} searchNotes={searchNotes} />
 
             <Flex justifyContent='space-between' alignItems='center' px={4}>
               <Text fontWeight='medium'>{notes.length} Notes</Text>

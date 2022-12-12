@@ -33,5 +33,13 @@ export const NotesServices = {
         Authorization: getAuthorization()
       }
     })
+  },
+
+  searchNote: async (query: string) => {
+    return await api.get(`/notes/search?q=${query}`, {
+      headers: {
+        Authorization: getAuthorization()
+      }
+    })
   }
 }

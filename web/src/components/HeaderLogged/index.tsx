@@ -30,8 +30,10 @@ interface HeaderProps {
   setCurrentNote: (note: Note) => void
 
   notes: Note[]
+  fetchNotes: () => void
   createNote: () => void
   deleteNote: (id: string) => void
+  searchNotes: (query: string) => void
 }
 
 export function HeaderLogged (
@@ -42,8 +44,10 @@ export function HeaderLogged (
     currentNote,
     setCurrentNote,
     notes,
+    fetchNotes,
     createNote,
-    deleteNote
+    deleteNote,
+    searchNotes
   }: HeaderProps
 ) {
   const { logout } = useAuth()
@@ -125,8 +129,10 @@ export function HeaderLogged (
         setCurrentNote={setCurrentNote}
 
         notes={notes}
+        fetchNotes={fetchNotes}
         createNote={createNote}
         deleteNote={deleteNote}
+        searchNotes={searchNotes}
       />
     </>
   )

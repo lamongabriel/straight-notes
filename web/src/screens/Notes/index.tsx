@@ -47,6 +47,11 @@ export function Notes () {
     }
   }
 
+  async function searchNotes (query: string) {
+    const response = await NotesServices.searchNote(query)
+    setNotes(response.data)
+  }
+
   return (
     <>
       <HeaderLogged
@@ -59,8 +64,10 @@ export function Notes () {
         setCurrentNote={(note: Note) => setCurrentNote(note)}
 
         notes={notes}
+        fetchNotes={fetchNotes}
         createNote={createNote}
         deleteNote={deleteNote}
+        searchNotes={searchNotes}
 
       />
       <NotesEditor note={currentNote} updateNote={updateNote} />
