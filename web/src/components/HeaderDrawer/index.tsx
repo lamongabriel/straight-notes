@@ -35,7 +35,7 @@ interface HeaderDrawerProps {
   notes: Note[]
   fetchNotes: () => void
   createNote: () => void
-  deleteNote: (id: string) => void
+  deleteNote: (id: string) => Promise<void>
   searchNotes: (query: string) => void
 }
 
@@ -55,6 +55,13 @@ export function HeaderDrawer (
   function handleSelectNote (note: Note) {
     setCurrentNote(note)
     onClose()
+  }
+
+  async function handleDeleteNote (note: Note) {
+    const isOkToDelete = window.confirm(`Are you sure you to delete ${note.title}?`)
+    if (isOkToDelete) {
+      await deleteNote(note._id)
+    }
   }
 
   return (
@@ -99,7 +106,7 @@ export function HeaderDrawer (
 
                       <Flex justifyContent='space-between'>
                         <Badge colorScheme='green'>Updated {moment(note.updatedAt).fromNow()}</Badge>
-                        <Box onClick={async () => deleteNote(note._id)} _hover={{ transform: 'scale(1.3)' }} transition='200ms'>
+                        <Box onClick={async () => await handleDeleteNote(note)} _hover={{ transform: 'scale(1.3)' }} transition='200ms'>
                           <Trash />
                         </Box>
                       </Flex>
