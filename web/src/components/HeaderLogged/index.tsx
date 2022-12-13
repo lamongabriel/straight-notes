@@ -54,6 +54,8 @@ export function HeaderLogged (
   const { logout } = useAuth()
   const navigate = useNavigate()
 
+  const { name } = JSON.parse(localStorage.getItem('straightnotes@user') as string)
+
   return (
     <>
       <Box
@@ -112,7 +114,7 @@ export function HeaderLogged (
                 </Center>
                 <br />
                 <Center>
-                  <p>Username</p>
+                  <p>{name}</p>
                 </Center>
                 <br />
                 <MenuDivider />
