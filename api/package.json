@@ -9,6 +9,9 @@
     "dev": "ts-node-dev --files ./src/server.ts",
     "build": "tsc"
   },
+	"engines": {
+		"node": "18.x"
+	},
   "dependencies": {
     "bcrypt": "^5.1.0",
     "cors": "^2.8.5",
