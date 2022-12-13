@@ -43,11 +43,7 @@ export function NotesEditor (props: NotesEditorProps) {
   }
 
   async function handleUpdateNote (note: string) {
-    const matched = note.match(/(?<=>)([\w\s]+)(?=<\/)/ig)
-    let title = ''
-    if (matched) {
-      title = matched[0]
-    }
+    const title = note.replace(/<\/?[^>]+(>|$)/g, '').slice(0, 30)
 
     await props.updateNote(props.note, { title, body: note })
 
