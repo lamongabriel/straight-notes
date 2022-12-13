@@ -53,9 +53,10 @@ export function AuthProvider ({ children }: AuthProviderProps) {
     try {
       const response = await api.post('/users/login', params)
 
-      const { token } = response.data
+      const { token, user } = response.data
 
       localStorage.setItem('straightnotes@token', JSON.stringify(token))
+      localStorage.setItem('straightnotes@user', JSON.stringify(user))
 
       api.defaults.headers.Authorization = `Bearer ${token as string}`
 

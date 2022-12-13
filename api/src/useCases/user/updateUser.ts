@@ -12,6 +12,8 @@ export async function updateUser (req: Request, res: Response) {
       })
     }
 
+    console.log('foi')
+
     const currentUser = await User.findOne({ email })
 
     if (!currentUser) {
