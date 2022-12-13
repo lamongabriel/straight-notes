@@ -19,7 +19,6 @@ export async function searchNote (req: Request, res: Response) {
 
     res.status(200).json(notes)
   } catch (error) {
-    console.log(error)
     return res.status(500).json(error)
   }
 }

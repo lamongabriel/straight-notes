@@ -25,9 +25,7 @@ const UserSchema = new Schema<IUser>({
 })
 
 UserSchema.pre('save', async function (next) {
-  console.log(this)
   if (this.isNew || this.isModified('password')) {
-    console.log('aqui')
     try {
       const hashedPassword = await bcrypt.hash(this.password, 10)
       this.password = hashedPassword

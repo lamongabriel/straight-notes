@@ -75,8 +75,6 @@ export function Account () {
         }
       })
 
-      console.log(response.data)
-
       toast.success('Updated!')
     } catch (error) {
       if (error instanceof AxiosError) {
