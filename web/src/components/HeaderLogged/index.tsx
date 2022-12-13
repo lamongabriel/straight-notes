@@ -31,10 +31,10 @@ interface HeaderProps {
   setCurrentNote: (note: Note) => void
 
   notes: Note[]
-  fetchNotes: () => void
-  createNote: () => void
-  deleteNote: (id: string) => void
-  searchNotes: (query: string) => void
+  fetchNotes: () => Promise<void>
+  createNote: () => Promise<void>
+  deleteNote: (id: string) => Promise<void>
+  searchNotes: (query: string) => Promise<void>
 }
 
 export function HeaderLogged (

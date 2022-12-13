@@ -4,8 +4,8 @@ import { FormControl, FormLabel, InputGroup, Input, InputRightElement, Button } 
 import { X } from 'phosphor-react'
 
 interface SearchProps {
-  fetchNotes: () => void
-  searchNotes: (query: string) => void
+  fetchNotes: () => Promise<void>
+  searchNotes: (query: string) => Promise<void>
 }
 
 export function Search ({ fetchNotes, searchNotes }: SearchProps) {
