@@ -24,11 +24,9 @@ import { Note } from '../../types/note'
 
 import { Trash } from 'phosphor-react'
 import { Search } from '../Search'
+import { useDrawer } from '../../hooks/useDrawer'
 
 interface HeaderDrawerProps {
-  isOpen: boolean
-  onClose: () => void
-
   currentNote: Note
   setCurrentNote: (note: Note) => void
 
@@ -41,8 +39,6 @@ interface HeaderDrawerProps {
 
 export function HeaderDrawer (
   {
-    isOpen,
-    onClose,
     currentNote,
     setCurrentNote,
     notes,
@@ -52,6 +48,8 @@ export function HeaderDrawer (
     searchNotes
   }: HeaderDrawerProps
 ) {
+  const { isOpen, onClose } = useDrawer()
+
   function handleSelectNote (note: Note) {
     setCurrentNote(note)
     onClose()

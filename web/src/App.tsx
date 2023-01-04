@@ -1,6 +1,8 @@
+import { DrawerContextProvider } from './contexts/drawerContext'
 import { ChakraProvider } from '@chakra-ui/react'
-import { ToastContainer } from 'react-toastify'
 import { AuthProvider } from './contexts/auth'
+
+import { ToastContainer } from 'react-toastify'
 
 import { Router } from './routes'
 
@@ -11,8 +13,10 @@ export function App () {
   return (
     <ChakraProvider>
       <AuthProvider>
-        <Router />
-        <ToastContainer />
+        <DrawerContextProvider>
+          <Router />
+          <ToastContainer />
+        </DrawerContextProvider>
       </AuthProvider>
     </ChakraProvider>
   )

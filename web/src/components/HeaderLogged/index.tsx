@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/useAuth'
-import { HeaderDrawer } from '../HeaderDrawer'
+import { HeaderDrawer } from './HeaderDrawer'
 
 import logoWhite from '../../assets/images/logo-white.png'
 
@@ -20,13 +20,9 @@ import {
 import { List, User } from 'phosphor-react'
 
 import { Note } from '../../types/note'
+import { useDrawer } from '../../hooks/useDrawer'
 
 interface HeaderProps {
-
-  isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
-
   currentNote: Note
   setCurrentNote: (note: Note) => void
 
@@ -39,9 +35,6 @@ interface HeaderProps {
 
 export function HeaderLogged (
   {
-    isOpen,
-    onClose,
-    onOpen,
     currentNote,
     setCurrentNote,
     notes,
@@ -52,6 +45,7 @@ export function HeaderLogged (
   }: HeaderProps
 ) {
   const { logout } = useAuth()
+  const { onOpen } = useDrawer()
   const navigate = useNavigate()
 
   const { name } = JSON.parse(localStorage.getItem('straightnotes@user') as string)
@@ -127,8 +121,6 @@ export function HeaderLogged (
       </Box>
 
       <HeaderDrawer
-        isOpen={isOpen}
-        onClose={onClose}
         currentNote={currentNote}
         setCurrentNote={setCurrentNote}
 

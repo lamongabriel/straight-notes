@@ -8,8 +8,6 @@ export function Notes () {
   const [notes, setNotes] = useState<Note[]>([])
   const [currentNote, setCurrentNote] = useState<Note>({} as Note)
 
-  const [isOpen, setIsOpen] = useState(false)
-
   useEffect(() => {
     fetchNotes()
   }, [])
@@ -76,11 +74,6 @@ export function Notes () {
   return (
     <>
       <HeaderLogged
-
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        onOpen={() => setIsOpen(true)}
-
         currentNote={currentNote}
         setCurrentNote={(note: Note) => setCurrentNote(note)}
 
