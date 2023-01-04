@@ -22,17 +22,38 @@ export function Notes () {
       )
     )
     setNotes(sortedNotes)
-    setCurrentNote(sortedNotes[0])
+    if (sortedNotes.length > 0) {
+      setCurrentNote(sortedNotes[0])
+    }
   }
 
   async function createNote () {
-    await NotesServices.createNote()
-    fetchNotes()
+    const response = await NotesServices.createNote()
+
+    const newNote = {
+      _id: response.data.createdNote._id,
+      title: response.data.createdNote.title,
+      body: response.data.createdNote.body,
+      createdAt: response.data.createdNote.createdAt,
+      updatedAt: response.data.createdNote.updatedAt
+    }
+
+    setNotes(prev => ([newNote, ...prev]))
+    setCurrentNote(newNote)
   }
 
   async function deleteNote (id: string) {
     await NotesServices.deleteNote(id)
-    fetchNotes()
+
+    const temporaryNotes = [...notes]
+
+    const index = temporaryNotes.findIndex(note => note._id === id)
+
+    if (index !== -1) {
+      temporaryNotes.splice(index, 1)
+    }
+
+    setNotes(temporaryNotes)
   }
 
   async function updateNote (oldNote: Note, params: { title: string, body: string }) {
