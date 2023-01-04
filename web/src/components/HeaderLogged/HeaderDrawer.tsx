@@ -16,13 +16,13 @@ import {
   Box,
   Text,
   Flex,
-  Badge,
-  Button
+  Button,
+  Icon
 } from '@chakra-ui/react'
 
 import { Note } from '../../types/note'
 
-import { Trash } from 'phosphor-react'
+import { ClockClockwise, Pencil, TrashSimple } from 'phosphor-react'
 import { Search } from '../Search'
 import { useDrawer } from '../../hooks/useDrawer'
 
@@ -96,17 +96,40 @@ export function HeaderDrawer (
                         <AccordionIcon />
                       </AccordionButton>
                     </h2>
-                    <AccordionPanel pb={4} onClick={() => handleSelectNote(note)} cursor='pointer'>
+                    <AccordionPanel pb={4}>
 
                       <Text noOfLines={3} mb={4}>
                         { note.body.replace(/(<([^>]+)>)/ig, '') }
                       </Text>
 
                       <Flex justifyContent='space-between'>
-                        <Badge colorScheme='green'>Updated {moment(note.updatedAt).fromNow()}</Badge>
-                        <Box onClick={async () => await handleDeleteNote(note)} _hover={{ transform: 'scale(1.3)' }} transition='200ms'>
-                          <Trash />
-                        </Box>
+                        <Button
+                          size='sm'
+                          colorScheme='purple'
+                          variant='outline'
+                          onClick={() => handleSelectNote(note)}
+                        >
+                          <Pencil />
+                        </Button>
+
+                        <Button
+                          leftIcon={<Icon as={ClockClockwise} />}
+                          size='sm'
+                          colorScheme='purple'
+                          variant='outline'
+                        >
+                          {moment(note.updatedAt).fromNow()}
+                        </Button>
+
+                        <Button
+                          size='sm'
+                          colorScheme='red'
+                          variant='outline'
+                          onClick={async () => await handleDeleteNote(note)}
+                        >
+                          <TrashSimple />
+                        </Button>
+
                       </Flex>
                     </AccordionPanel>
                   </AccordionItem>
