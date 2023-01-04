@@ -24,6 +24,8 @@ Everybody needs to write, either it's for studying, or to better organize your t
     <img src="./.github/desktop.png" alt="Straight notes home" />
 </div>
 
+## :zap: Project is live!!
+[https://straight-notes.up.railway.app/](https://straight-notes.up.railway.app/)
 
 <a id="functionalities"></a>
 
