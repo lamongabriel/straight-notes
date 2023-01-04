@@ -1,15 +1,16 @@
 import { ChangeEvent, useState } from 'react'
 
+import { useNotes } from '../../hooks/useNotes'
+
 import { FormControl, FormLabel, InputGroup, Input, InputRightElement, Button } from '@chakra-ui/react'
+
 import { X } from 'phosphor-react'
 
-interface SearchProps {
-  fetchNotes: () => Promise<void>
-  searchNotes: (query: string) => Promise<void>
-}
+import { NotesServices } from '../../services/notes'
 
-export function Search ({ fetchNotes, searchNotes }: SearchProps) {
+export function Search () {
   const [query, setQuery] = useState('')
+  const { setNotes } = useNotes()
 
   function handleChange (e: ChangeEvent<HTMLInputElement>) {
     setQuery(e.target.value)
@@ -22,8 +23,12 @@ export function Search ({ fetchNotes, searchNotes }: SearchProps) {
   }
 
   function handleRemoveSearch () {
-    fetchNotes()
     setQuery('')
+  }
+
+  async function searchNotes (query: string) {
+    const response = await NotesServices.searchNote(query)
+    setNotes(response.data)
   }
 
   return (

@@ -1,27 +1,24 @@
 import { useEffect, useState } from 'react'
-import { Note } from '../../types/note'
 
 import ReactQuill, { } from 'react-quill'
-
 import 'react-quill/dist/quill.snow.css'
 
-import {
-  Container
-} from '@chakra-ui/react'
+import { Container } from '@chakra-ui/react'
+
 import { toast } from 'react-toastify'
 
-interface NotesEditorProps {
-  note: Note
-  updateNote: (oldNote: Note, params: { title: string, body: string }) => Promise<void>
-}
+import { useNotes } from '../../hooks/useNotes'
+import { NotesServices } from '../../services/notes'
 
-export function NotesEditor (props: NotesEditorProps) {
+export function NotesEditor () {
   const [currentContent, setCurrentContent] = useState('')
   const [timer, setTimer] = useState<any>({})
 
+  const { notes, setNotes, currentNote, setCurrentNote } = useNotes()
+
   useEffect(() => {
-    props.note?.body && setCurrentContent(props.note.body)
-  }, [props.note])
+    currentNote && setCurrentContent(currentNote.body)
+  }, [currentNote])
 
   const modules = {
     toolbar: [
@@ -42,19 +39,28 @@ export function NotesEditor (props: NotesEditorProps) {
     ]
   }
 
-  async function handleUpdateNote (note: string) {
-    const title = note.replace(/<\/?[^>]+(>|$)/g, '').slice(0, 30)
-
-    await props.updateNote(props.note, { title, body: note })
-
-    toast.success('Saved', { autoClose: 1000 })
-  }
-
   function handleChange (value: string, delta: any, source: any) {
     clearTimeout(timer)
     if (source === 'user') {
       setCurrentContent(value)
       setTimer(setTimeout(async () => await handleUpdateNote(value), 3000))
+    }
+  }
+
+  async function handleUpdateNote (fullNote: string) {
+    const title = fullNote.replace(/<\/?[^>]+(>|$)/g, '').slice(0, 30)
+
+    const response = await NotesServices.updateNote(currentNote._id, { title, body: fullNote })
+
+    if (response.status === 200) {
+      const index = notes.indexOf(currentNote)
+      const updatedNotes = [...notes]
+
+      updatedNotes[index] = response.data
+
+      setNotes(updatedNotes)
+      setCurrentNote(response.data)
+      toast.success('Saved', { autoClose: 1000 })
     }
   }
 

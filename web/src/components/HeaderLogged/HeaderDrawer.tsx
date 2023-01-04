@@ -25,30 +25,12 @@ import { Note } from '../../types/note'
 import { ClockClockwise, Pencil, TrashSimple } from 'phosphor-react'
 import { Search } from '../Search'
 import { useDrawer } from '../../hooks/useDrawer'
+import { useNotes } from '../../hooks/useNotes'
+import { NotesServices } from '../../services/notes'
 
-interface HeaderDrawerProps {
-  currentNote: Note
-  setCurrentNote: (note: Note) => void
-
-  notes: Note[]
-  fetchNotes: () => Promise<void>
-  createNote: () => Promise<void>
-  deleteNote: (id: string) => Promise<void>
-  searchNotes: (query: string) => Promise<void>
-}
-
-export function HeaderDrawer (
-  {
-    currentNote,
-    setCurrentNote,
-    notes,
-    fetchNotes,
-    createNote,
-    deleteNote,
-    searchNotes
-  }: HeaderDrawerProps
-) {
+export function HeaderDrawer () {
   const { isOpen, onClose } = useDrawer()
+  const { notes, setNotes, currentNote, setCurrentNote } = useNotes()
 
   function handleSelectNote (note: Note) {
     setCurrentNote(note)
@@ -57,9 +39,25 @@ export function HeaderDrawer (
 
   async function handleDeleteNote (note: Note) {
     const isOkToDelete = window.confirm(`Are you sure you to delete ${note.title}?`)
+
     if (isOkToDelete) {
-      await deleteNote(note._id)
+      await NotesServices.deleteNote(note._id)
+
+      const temporaryNotes = [...notes]
+      const index = temporaryNotes.findIndex(el => note._id === el._id)
+
+      if (index !== -1) {
+        temporaryNotes.splice(index, 1)
+      }
+      setNotes(temporaryNotes)
     }
+  }
+
+  async function handleCreateNote () {
+    const newNote = await NotesServices.createNote()
+
+    setNotes(prev => ([newNote, ...prev]))
+    setCurrentNote(newNote)
   }
 
   return (
@@ -71,11 +69,11 @@ export function HeaderDrawer (
         <DrawerBody p={0}>
           <Stack spacing={4}>
 
-            <Search fetchNotes={fetchNotes} searchNotes={searchNotes} />
+            <Search />
 
             <Flex justifyContent='space-between' alignItems='center' px={4}>
               <Text fontWeight='medium'>{notes.length} Notes</Text>
-              <Button size='sm' colorScheme='purple' variant='solid' onClick={createNote}>Note +</Button>
+              <Button size='sm' colorScheme='purple' variant='solid' onClick={handleCreateNote}>Note +</Button>
             </Flex>
 
             <Accordion>
@@ -125,7 +123,7 @@ export function HeaderDrawer (
                           size='sm'
                           colorScheme='red'
                           variant='outline'
-                          onClick={async () => await handleDeleteNote(note)}
+                          onClick={() => handleDeleteNote(note)}
                         >
                           <TrashSimple />
                         </Button>
