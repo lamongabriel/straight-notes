@@ -49,6 +49,7 @@ export function RegisterForm () {
       bg={'white'}
       boxShadow={'lg'}
       p={8}
+      w='full'
     >
       <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} onSubmit={handleSubmit}>
         <FormControl id="name" isRequired>
@@ -106,7 +107,7 @@ export function RegisterForm () {
           <Button
             loadingText="Submitting"
             size="lg"
-            colorScheme='purple'
+            colorScheme='brand'
             isLoading={isLoading}
             type='submit'
           >

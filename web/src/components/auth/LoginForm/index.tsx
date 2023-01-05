@@ -50,6 +50,7 @@ export function LoginForm () {
       bg={'white'}
       boxShadow={'lg'}
       p={8}
+      w='full'
     >
       <form style={{ display: 'flex', flexDirection: 'column', gap: '16px' }} onSubmit={handleSubmit}>
         <FormControl id="email" isRequired>
@@ -108,7 +109,7 @@ export function LoginForm () {
             </Checkbox>
           </Stack>
           <Button
-            colorScheme='purple'
+            colorScheme='brand'
             loadingText="Loading"
             size="lg"
             type='submit'

@@ -11,9 +11,11 @@ import './styles/global.css'
 import { NotesContextProvider } from './contexts/NotesContext'
 import { DrawerContextProvider } from './contexts/DrawerContext'
 
+import { theme } from './styles/theme'
+
 export function App () {
   return (
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
       <AuthProvider>
         <NotesContextProvider>
           <DrawerContextProvider>

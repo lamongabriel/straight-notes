@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Flex } from '@chakra-ui/react'
 
-import { Fade, Slide } from 'react-awesome-reveal'
+import { Zoom } from 'react-awesome-reveal'
 
 import { Header } from '../Header'
 
@@ -14,17 +14,14 @@ export function Layout ({ children }: LayoutProps) {
     <Flex
       flexDir='column'
       overflowX='hidden'
-      bg='purple.800'
-      bgGradient='linear-gradient(90deg, rgba(95,10,135,1) 0%, rgba(142,71,156,1) 100%)'
+      bg='brand.500'
     >
-      <Slide direction='down'>
-        <Header />
-      </Slide>
-      <Fade>
+      <Header />
+      <Zoom duration={200}>
         <Flex w='100vw' minH='calc(100vh - 70px)' maxWidth="1480px" px={8} mx='auto'>
           {children}
         </Flex>
-      </Fade>
+      </Zoom>
     </Flex>
   )
 }

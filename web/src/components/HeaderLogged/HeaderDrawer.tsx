@@ -73,7 +73,7 @@ export function HeaderDrawer () {
 
             <Flex justifyContent='space-between' alignItems='center' px={4}>
               <Text fontWeight='medium'>{notes.length} Notes</Text>
-              <Button size='sm' colorScheme='purple' variant='solid' onClick={handleCreateNote}>Note +</Button>
+              <Button size='sm' colorScheme='brand' variant='solid' onClick={handleCreateNote}>Note +</Button>
             </Flex>
 
             <Accordion>
@@ -86,7 +86,7 @@ export function HeaderDrawer () {
                           <Text
                             noOfLines={1}
                             fontWeight='bold'
-                            color={currentNote._id === note._id ? 'purple.500' : 'inherit'}
+                            color={currentNote._id === note._id ? 'brand.500' : 'inherit'}
                           >
                             {note.title}
                           </Text>
@@ -103,7 +103,7 @@ export function HeaderDrawer () {
                       <Flex justifyContent='space-between'>
                         <Button
                           size='sm'
-                          colorScheme='purple'
+                          colorScheme='brand'
                           variant='outline'
                           onClick={() => handleSelectNote(note)}
                         >
@@ -113,7 +113,7 @@ export function HeaderDrawer () {
                         <Button
                           leftIcon={<Icon as={ClockClockwise} />}
                           size='sm'
-                          colorScheme='purple'
+                          colorScheme='brand'
                           variant='outline'
                         >
                           {moment(note.updatedAt).fromNow()}

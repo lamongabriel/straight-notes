@@ -44,12 +44,12 @@ export function Header () {
                 size={{ base: 'sm', md: 'md' }}
                 as={Link}
                 to='/login'
-                colorScheme='purple'
+                colorScheme='brand'
                 variant='ghost'
               >
                 Login
               </Button>
-              <Button size={{ base: 'sm', md: 'md' }} as={Link} to='/register' colorScheme='purple' variant='solid'>
+              <Button size={{ base: 'sm', md: 'md' }} as={Link} to='/register' colorScheme='brand' variant='solid'>
                 Sign up
               </Button>
             </HStack>
