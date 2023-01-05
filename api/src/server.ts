@@ -25,7 +25,7 @@ async function bootstrap () {
     res.sendStatus(404)
   })
 
-  app.listen(process.env.SERVER_PORT, () => {
+  app.listen(process.env.PORT, () => {
     console.log(`🚀 Server started at http://localhost:${process.env.SERVER_PORT as string}`)
   })
 }
