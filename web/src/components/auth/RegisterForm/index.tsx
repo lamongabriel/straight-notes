@@ -60,7 +60,7 @@ export function RegisterForm () {
             focusBorderColor='black'
             onChange={handleFormDataChange}
             value={formData.name}
-            autoComplete='username'
+            autoComplete='name'
             disabled={isLoading}
           />
         </FormControl>
