@@ -51,7 +51,7 @@ export function UserMenu () {
           {isWide && (
             <Box textAlign='right'>
               <Heading size='sm' color='gray.100' fontWeight='medium'>{user.name}</Heading>
-              <Text color='purple.200' fontSize='x-small' fontWeight='normal'>{user.email}</Text>
+              <Text color='brand.200' fontSize='x-small' fontWeight='normal'>{user.email}</Text>
             </Box>
           )}
           <Avatar name={user.name} bg='red.400'>

@@ -46,7 +46,7 @@ export function Home () {
             variant='outline'
             size='lg'
             border='2px'
-            _hover={{ bg: 'white', color: 'brand.500' }}
+            _hover={{ bg: 'white', color: 'brand.600' }}
           >
             Register for free now
           </Button>

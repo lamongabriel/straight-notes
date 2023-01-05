@@ -78,7 +78,7 @@ export function NotesList () {
                     <Text
                       noOfLines={1}
                       fontWeight='bold'
-                      color={currentNote._id === note._id ? 'brand.500' : 'inherit'}
+                      color={currentNote._id === note._id ? 'brand.400' : 'inherit'}
                     >
                       {note.title}
                     </Text>
