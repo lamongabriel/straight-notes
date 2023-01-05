@@ -27,7 +27,7 @@ export function Home () {
       >
         <Stack spacing={6} maxW='520px' order={{ base: 1, lg: 0 }}>
           <Heading color='white' fontSize={{ base: '3xl', lg: '5xl' }}>
-            Create notes easily and access then when you need on the cloud.
+            Create notes easily and access then when you need in the cloud.
           </Heading>
           <Text color='white'>
             Straight notes let's you create your notes and safely store then in the cloud for you to access when you want.

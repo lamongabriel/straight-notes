@@ -32,7 +32,7 @@ export function Login () {
             <Image src={logo} />
           </Box>
           <Heading color={'white'} fontSize={{ base: '2xl', lg: '4xl' }} textAlign={'center'}>
-            Your notes on the cloud
+            Your notes in the cloud
           </Heading>
           <Text fontSize={'lg'} color={'white'} textAlign={'center'}>
               Welcome back, we've missed you 💗

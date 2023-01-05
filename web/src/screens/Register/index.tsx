@@ -32,10 +32,10 @@ export function Register () {
             <Image src={logo} />
           </Box>
           <Heading color={'white'} fontSize={{ base: '2xl', lg: '4xl' }} textAlign={'center'}>
-            Your notes on the cloud
+            Your notes in the cloud
           </Heading>
           <Text fontSize={'lg'} color={'white'} textAlign={'center'}>
-            Create, edit and view you notes anywhere in the world
+            Create, edit and view your notes anywhere in the world
           </Text>
         </Stack>
 
