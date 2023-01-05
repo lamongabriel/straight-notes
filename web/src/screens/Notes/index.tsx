@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import { HeaderLogged } from '../../components/HeaderLogged'
+import { Layout } from '../../components/Layout'
 import { NotesEditor } from '../../components/NotesEditor'
 
 import { useNotes } from '../../hooks/useNotes'
@@ -23,9 +23,8 @@ export function Notes () {
   }
 
   return (
-    <>
-      <HeaderLogged/>
+    <Layout logged>
       <NotesEditor />
-    </>
+    </Layout>
   )
 }
