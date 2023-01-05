@@ -12,7 +12,7 @@ import {
   Heading
 } from '@chakra-ui/react'
 
-import { Search } from '../Search'
+import { Search } from './Search'
 import { useDrawer } from '../../hooks/useDrawer'
 import { useNotes } from '../../hooks/useNotes'
 import { NotesServices } from '../../services/notes'
