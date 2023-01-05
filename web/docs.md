@@ -1,2 +1,2 @@
-Define URL at /src/services/api.ts
-baseUrl: ###.###.#.###:###
+Define .env called VITE_API_URL
+API_URL: ###.###.#.###:###
