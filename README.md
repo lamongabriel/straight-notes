@@ -1,3 +1,5 @@
+<br>
+<br>
 <h3 align="center">
   <div align="center">
     <img src="./.github/logo-white.png" alt="Straight notes logo" />
@@ -24,8 +26,8 @@ Everybody needs to write, either it's for studying, or to better organize your t
     <img src="./.github/desktop.png" alt="Straight notes home" />
 </div>
 
-## :zap: Project is live!!
-[https://straight-notes.up.railway.app/](https://straight-notes.up.railway.app/)
+## :zap: Check it out
+[https://straight-notes-production.up.railway.app/](https://straight-notes-production.up.railway.app/)
 
 <a id="functionalities"></a>
 
@@ -113,12 +115,11 @@ $ yarn dev
 ```bash
 $ cd /web
 ```
-Update the url at ```/src/services/api.ts```
+Create ```.env``` file at the root of the /web folder and define a VITE_API_URL.
 
-```
-export const api = axios.create({
-  baseURL: 'http://YOUR_MONGO_URL_HERE:MONGO_PORT'
-})
+```bash
+  $ # Define .env called VITE_API_URL
+  $ VITE_API_URL: https://localhost.local:3001
 ```
 
 Then, run the client.
