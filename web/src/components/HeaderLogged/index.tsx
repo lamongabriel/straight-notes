@@ -14,7 +14,7 @@ export function HeaderLogged () {
   return (
     <>
       <Box
-        bgColor={'purple.700'}
+        bgColor='brand.500'
         boxShadow='lg'
         height={{ base: '63px', md: '70px' }}
       >
