@@ -2,7 +2,7 @@
 <br>
 <h3 align="center">
   <div align="center">
-    <img src="./.github/logo-white.png" alt="Straight notes logo" />
+    <img src="./.github/logo-white-new.png" alt="Straight notes logo" />
   </div>
   <br><br>
   <b>Your notes best stored here, on the cloud.</b>
@@ -23,7 +23,7 @@
 Everybody needs to write, either it's for studying, or to better organize your tasks of the week, notes are universal. Straight notes comes to solve your problem: create, edit, and access your notes from anywhere in the globe, you just need some device that can access the web and a internet connection.
 
 <div align="center">
-    <img src="./.github/desktop.png" alt="Straight notes home" />
+    <img src="./.github/desktop-new.png" alt="Straight notes home" />
 </div>
 
 ## :zap: Check it out
@@ -48,7 +48,7 @@ Everybody needs to write, either it's for studying, or to better organize your t
   - Update your account info.
 
 <div align="center">
-    <img src="./.github/desktop_dashboard.png" alt="Straight notes home" />
+    <img src="./.github/desktop_dashboard-new.png" alt="Straight notes home" />
 </div>
 
 <a id="technologies"></a>
@@ -67,7 +67,7 @@ The project is made with:
 - [Mongoose](https://mongoosejs.com)
 
 <div align="center">
-    <img src="./.github/mobile.png" alt="Straight notes home" />
+    <img src="./.github/mobile-new.png" alt="Straight notes home" />
 </div>
 
 <a id="how-to-use"></a>
