@@ -62,7 +62,7 @@ export function AuthProvider ({ children }: AuthProviderProps) {
 
       setAuthenticated(true)
 
-      toast.success('Welcome back!')
+      toast.success('Welcome to Straight Notes')
 
       return navigate('/notes')
     } catch (error) {
@@ -78,8 +78,11 @@ export function AuthProvider ({ children }: AuthProviderProps) {
     try {
       await api.post('/users/register', params)
 
-      toast.success('Thanks for joining us! Please log-in now.')
-      return navigate('/login')
+      return await handleLogin({
+        email: params.email,
+        password: params.password,
+        rememberMe: true
+      })
     } catch (error) {
       if (error instanceof AxiosError) {
         toast.error(error.response?.data.message)

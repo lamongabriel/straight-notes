@@ -16,6 +16,7 @@ import {
   InputGroup,
   InputRightElement
 } from '@chakra-ui/react'
+
 import { Eye, EyeSlash } from 'phosphor-react'
 
 export function LoginForm () {
@@ -105,7 +106,6 @@ export function LoginForm () {
             >
               Remember me
             </Checkbox>
-            <Link color={'blue.400'}>Forgot password?</Link>
           </Stack>
           <Button
             colorScheme='purple'
