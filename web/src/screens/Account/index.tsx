@@ -11,10 +11,8 @@ import {
   Stack,
   Avatar,
   Center,
-  ScaleFade,
   InputGroup,
-  InputRightElement,
-  Box
+  InputRightElement
 } from '@chakra-ui/react'
 
 import { Eye, EyeSlash } from 'phosphor-react'
@@ -24,6 +22,8 @@ import { api } from '../../services/api'
 import { getAuthorization } from '../../utils/getAuthorization'
 import { toast } from 'react-toastify'
 import { AxiosError } from 'axios'
+
+import { Layout } from '../../components/Layout'
 
 interface FormDataProps {
   name: string
@@ -45,10 +45,9 @@ export function Account () {
   } as FormDataProps)
 
   const navigate = useNavigate()
+  const user = JSON.parse(localStorage.getItem('straightnotes@user') as string) as User
 
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem('straightnotes@user') as string) as User
-
     setFormData(prev => (
       {
         ...prev,
@@ -69,7 +68,7 @@ export function Account () {
     try {
       const formDataWithValidFields = Object.fromEntries(Object.entries(formData).filter(([_, v]) => v.length > 0))
 
-      const response = await api.put('/users', formDataWithValidFields, {
+      await api.put('/users', formDataWithValidFields, {
         headers: {
           Authorization: getAuthorization()
         }
@@ -87,28 +86,24 @@ export function Account () {
   }
 
   return (
-    <Flex
-      minH={'100vh'}
-      align={'center'}
-      justify={'center'}
-      bg='purple.700'
-    >
-      <Box
+    <Layout logged>
+      <Flex
         as='form'
+        align='center'
+        justify='center'
         onSubmit={handleSubmit}
         w={'full'}
-        maxW={'md'}
-        bg={'white'}
-        rounded={'xl'}
-        boxShadow={'lg'}
-        p={6}
-        my={12}
-        mx={4}
+        mx='auto'
+        maxW={'lg'}
       >
         <Stack
+          my={12}
+          w='full'
           spacing={4}
-          as={ScaleFade}
-          in={true}
+          bg={'white'}
+          rounded={'lg'}
+          boxShadow={'lg'}
+          p={6}
         >
           <Heading lineHeight={1.1} fontSize={{ base: '2xl', sm: '3xl' }}>
             User Profile Edit
@@ -117,7 +112,7 @@ export function Account () {
             <FormLabel>User Icon</FormLabel>
             <Stack direction={'column'} spacing={6}>
               <Center>
-                <Avatar size="xl"></Avatar>
+                <Avatar size="xl" name={user.name}></Avatar>
               </Center>
             </Stack>
           </FormControl>
@@ -209,7 +204,7 @@ export function Account () {
             </Button>
           </Stack>
         </Stack>
-      </Box>
-    </Flex>
+      </Flex>
+    </Layout>
   )
 }

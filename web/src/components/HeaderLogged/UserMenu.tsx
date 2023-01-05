@@ -54,9 +54,7 @@ export function UserMenu () {
               <Text color='brand.200' fontSize='x-small' fontWeight='normal'>{user.email}</Text>
             </Box>
           )}
-          <Avatar name={user.name} bg='red.400'>
-
-          </Avatar>
+          <Avatar name={user.name} bg='red.400'></Avatar>
         </Flex>
       </MenuButton>
       <MenuList alignItems={'center'}>
@@ -70,11 +68,10 @@ export function UserMenu () {
           justifyContent='center'
         >
 
-          <Avatar name={user.name} bg='red.400'>
-
-          </Avatar>
-          <Heading size='md' color='gray.700' fontWeight='medium'>
+          <Avatar name={user.name} bg='red.400'></Avatar>
+          <Heading size='md' color='gray.700' fontWeight='medium' textAlign='center'>
             {user.name}
+            <Text color='brand.400' fontSize='md' fontWeight='normal'>{user.email}</Text>
           </Heading>
         </Flex>
         <MenuDivider />
