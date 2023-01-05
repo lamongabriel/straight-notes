@@ -16,7 +16,7 @@ export function Layout ({ children, logged = false }: LayoutProps) {
     <Flex
       flexDir='column'
       overflowX='hidden'
-      bg={logged ? 'gray.100' : 'brand.500'}
+      bg={logged ? '#fafafa' : 'brand.500'}
     >
       {logged ? <HeaderLogged/> : <Header />}
       <Zoom duration={200}>

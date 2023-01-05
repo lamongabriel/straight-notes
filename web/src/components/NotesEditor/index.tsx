@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react'
 
-import ReactQuill, { } from 'react-quill'
+import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-import { Container } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 
 import { toast } from 'react-toastify'
 
 import { useNotes } from '../../hooks/useNotes'
 import { NotesServices } from '../../services/notes'
+
+import './quill.css'
 
 export function NotesEditor () {
   const [currentContent, setCurrentContent] = useState('')
@@ -65,8 +67,8 @@ export function NotesEditor () {
   }
 
   return (
-    <Container maxW='8xl' padding='0'>
+    <Box w='full' bg='white' my={4} borderRadius={8} height='full'>
       <ReactQuill value={currentContent} modules={modules} onChange={handleChange}/>
-    </Container>
+    </Box>
   )
 }

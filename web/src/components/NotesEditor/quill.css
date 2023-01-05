@@ -1,0 +1,26 @@
+.ql-container {
+  border-bottom-left-radius: 0.5em;
+  border-bottom-right-radius: 0.5em;
+}
+
+.ql-snow.ql-toolbar {
+  display: block;
+  border-top-left-radius: 0.5em;
+  border-top-right-radius: 0.5em;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+
+  align-items: center;
+  justify-content: center;
+}
+
+.ql-toolbar.ql-snow .ql-formats {
+  display: flex;
+  margin: 0;
+}
+
+.ql-editor {
+  min-height: 30vh;
+}
