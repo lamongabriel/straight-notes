@@ -57,6 +57,7 @@ export function NotesList () {
     }
 
     closeDelete()
+    setCurrentNote({})
     setNotes(temporaryNotes)
   }
 
