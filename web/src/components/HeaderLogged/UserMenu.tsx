@@ -9,7 +9,8 @@ import {
   MenuDivider,
   MenuItem,
   MenuList,
-  Text
+  Text,
+  useBreakpointValue
 } from '@chakra-ui/react'
 
 import { useNavigate } from 'react-router'
@@ -20,6 +21,11 @@ import { User } from '../../types/user'
 export function UserMenu () {
   const navigate = useNavigate()
   const { logout } = useAuth()
+
+  const isWide = useBreakpointValue({
+    base: false,
+    md: true
+  })
 
   let user: User = {} as User
   try {
@@ -42,10 +48,12 @@ export function UserMenu () {
         minW={0}
       >
         <Flex align='center' justify='center' gap={6}>
-          <Box textAlign='right'>
-            <Heading size='md' color='gray.100' fontWeight='medium'>{user.name}</Heading>
-            <Text color='gray.400' fontSize='xs' fontWeight='normal'>{user.email}</Text>
-          </Box>
+          {isWide && (
+            <Box textAlign='right'>
+              <Heading size='sm' color='gray.100' fontWeight='medium'>{user.name}</Heading>
+              <Text color='purple.200' fontSize='x-small' fontWeight='normal'>{user.email}</Text>
+            </Box>
+          )}
           <Avatar name={user.name} bg='red.400'>
 
           </Avatar>
@@ -65,7 +73,7 @@ export function UserMenu () {
           <Avatar name={user.name} bg='red.400'>
 
           </Avatar>
-          <Heading size='md'>
+          <Heading size='md' color='gray.700' fontWeight='medium'>
             {user.name}
           </Heading>
         </Flex>
