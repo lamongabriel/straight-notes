@@ -13,5 +13,9 @@ export const theme = extendTheme({
       800: '#301f45',
       900: '#291a3b'
     }
+  },
+  fonts: {
+    heading: 'Inter, sans-serif',
+    body: 'Inter, sans-serif'
   }
 })
