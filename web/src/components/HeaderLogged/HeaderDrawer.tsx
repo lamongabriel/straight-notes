@@ -8,7 +8,8 @@ import {
   Stack,
   Text,
   Flex,
-  Button
+  Button,
+  Heading
 } from '@chakra-ui/react'
 
 import { Search } from '../Search'
@@ -33,7 +34,9 @@ export function HeaderDrawer () {
       <DrawerOverlay />
       <DrawerContent>
         <DrawerCloseButton />
-        <DrawerHeader borderBottomWidth='1px'>Your notes</DrawerHeader>
+        <DrawerHeader borderBottomWidth='1px'>
+          <Heading size='md'>Your notes</Heading>
+        </DrawerHeader>
         <DrawerBody p={0}>
           <Stack spacing={4}>
 

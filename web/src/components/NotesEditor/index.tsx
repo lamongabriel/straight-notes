@@ -11,6 +11,8 @@ import { useNotes } from '../../hooks/useNotes'
 import { NotesServices } from '../../services/notes'
 
 import './quill.css'
+import { Empty } from './Empty'
+import { SelectNote } from './SelectNote'
 
 export function NotesEditor () {
   const [currentContent, setCurrentContent] = useState('')
@@ -67,8 +69,13 @@ export function NotesEditor () {
   }
 
   return (
-    <Box w='full' bg='white' my={4} borderRadius={8} height='full'>
-      <ReactQuill value={currentContent} modules={modules} onChange={handleChange}/>
+    <Box w='full' bg='white' my={8} borderRadius={8} height='full'>
+      {currentContent
+        ? <ReactQuill value={currentContent} modules={modules} onChange={handleChange}/>
+        : notes.length === 0
+          ? <Empty />
+          : <SelectNote />
+      }
     </Box>
   )
 }
