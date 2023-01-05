@@ -1,32 +1,15 @@
-import { useNavigate } from 'react-router-dom'
+import { UserMenu } from './UserMenu'
 import { HeaderDrawer } from './HeaderDrawer'
+import { Box, Container, Button, Image } from '@chakra-ui/react'
 
 import logoWhite from '../../assets/images/logo-white.png'
 
-import {
-  Box,
-  Container,
-  Button,
-  Image,
-  MenuList,
-  Center,
-  MenuDivider,
-  MenuItem,
-  Menu,
-  MenuButton
-} from '@chakra-ui/react'
+import { List } from 'phosphor-react'
 
-import { List, User } from 'phosphor-react'
-
-import { useAuth } from '../../hooks/useAuth'
 import { useDrawer } from '../../hooks/useDrawer'
 
 export function HeaderLogged () {
-  const { logout } = useAuth()
   const { onOpen } = useDrawer()
-  const navigate = useNavigate()
-
-  const { name } = JSON.parse(localStorage.getItem('straightnotes@user') as string)
 
   return (
     <>
@@ -67,34 +50,8 @@ export function HeaderLogged () {
             />
           </Box>
 
-          <Box>
-            <Menu>
-              <MenuButton
-                as={Button}
-                rounded={'full'}
-                variant={'link'}
-                cursor={'pointer'}
-                display={'flex'}
-                minW={0}
-              >
-                <User color='#fff' size={30} />
-              </MenuButton>
-              <MenuList alignItems={'center'}>
-                <br />
-                <Center>
-                  <User size={92} />
-                </Center>
-                <br />
-                <Center>
-                  <p>{name}</p>
-                </Center>
-                <br />
-                <MenuDivider />
-                <MenuItem onClick={() => navigate('/account')}>Account Settings</MenuItem>
-                <MenuItem onClick={logout}>Logout</MenuItem>
-              </MenuList>
-            </Menu>
-          </Box>
+          <UserMenu />
+
         </Container>
       </Box>
 
