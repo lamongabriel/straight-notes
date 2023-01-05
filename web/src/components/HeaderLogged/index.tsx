@@ -8,6 +8,8 @@ import { List } from 'phosphor-react'
 
 import { useDrawer } from '../../hooks/useDrawer'
 
+import { Link } from 'react-router-dom'
+
 export function HeaderLogged () {
   const { onOpen } = useDrawer()
 
@@ -29,7 +31,7 @@ export function HeaderLogged () {
           height='full'
         >
 
-          <Box display='flex' flexDirection='row' alignItems='center' gap={6}>
+          <Box as={Link} to='/notes' display='flex' flexDirection='row' alignItems='center' gap={6}>
             <Image
               display={{ base: 'none', md: 'block' }}
               w={{ base: '100px', md: '120px' }}
@@ -41,7 +43,7 @@ export function HeaderLogged () {
             </Button>
           </Box>
 
-          <Box display={'flex'}>
+          <Box as={Link} to='/notes' display={'flex'}>
             <Image
               display={{ base: 'block', md: 'none' }}
               w='105px'

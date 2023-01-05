@@ -29,7 +29,7 @@ export function Header () {
           height='full'
         >
 
-          <Box display='flex' flexDirection='row' alignItems='center' gap={6}>
+          <Box as={Link} to='/' display='flex' flexDirection='row' alignItems='center' gap={6}>
             <Image
               display={'block'}
               w={{ base: '100px', md: '120px' }}
