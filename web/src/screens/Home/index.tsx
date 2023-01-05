@@ -1,9 +1,5 @@
-import { Header } from '../../components/Header'
-
 import {
-  Box,
   Image,
-  Container,
   Text,
   Heading,
   Stack,
@@ -13,25 +9,21 @@ import {
 
 import { Link } from 'react-router-dom'
 
+import { Layout } from '../../components/Layout'
+
 import presentation from '../../assets/images/presentation.png'
 import users from '../../assets/images/users.png'
 
 export function Home () {
   return (
-    <Box minH='100vh' bg='purple.700' w='full'>
-
-      <Header />
-
-      <Container
-        display='flex'
-        minH='calc(100vh - 70px)'
+    <Layout>
+      <Flex
+        w='full'
         alignItems='center'
         flexDirection={{ base: 'column', lg: 'row' }}
         justifyContent={{ base: 'center', lg: 'space-between' }}
         py={{ base: 8, lg: 'none' }}
         gap={{ base: 8, lg: 'none' }}
-        maxW='8xl'
-        w='full'
       >
         <Stack spacing={6} maxW='520px' order={{ base: 1, lg: 0 }}>
           <Heading color='white' fontSize={{ base: '3xl', lg: '5xl' }}>
@@ -64,7 +56,7 @@ export function Home () {
           maxW={{ base: '90%', md: '500px', lg: '460px', xl: '600px' }}
           alt='Straight notes APP presented on mobile devices.'
         />
-      </Container>
-    </Box>
+      </Flex>
+    </Layout>
   )
 }

@@ -14,10 +14,9 @@ export function Header () {
   return (
     <>
       <Box
-        bgColor={'white'}
+        bgColor='white'
         boxShadow='lg'
-        borderBottom={'solid 1px #ccc'}
-        height={{ base: '63px', md: '70px' }}
+        height='70px'
       >
         <Container
           py={4}
