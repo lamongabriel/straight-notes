@@ -27,7 +27,7 @@ Everybody needs to write, either it's for studying, or to better organize your t
 </div>
 
 ## :zap: Check it out
-[straight-notes-lamongabriel.vercel.app](straight-notes-lamongabriel.vercel.app)
+[https://straight-notes-lamongabriel.vercel.app/](https://straight-notes-lamongabriel.vercel.app/)
 
 <a id="functionalities"></a>
 
