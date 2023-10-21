@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import ReactQuill from 'react-quill'
 import 'react-quill/dist/quill.snow.css'
 
-import { Box } from '@chakra-ui/react'
+import { Box, Flex, Spinner } from '@chakra-ui/react'
 
 import { toast } from 'react-toastify'
 
@@ -18,7 +18,7 @@ export function NotesEditor () {
   const [currentContent, setCurrentContent] = useState('')
   const [timer, setTimer] = useState<any>({})
 
-  const { notes, setNotes, currentNote, setCurrentNote } = useNotes()
+  const { notes, setNotes, currentNote, setCurrentNote, loading } = useNotes()
 
   useEffect(() => {
     currentNote && setCurrentContent(currentNote.body)
@@ -66,6 +66,14 @@ export function NotesEditor () {
       setCurrentNote(response.data)
       toast.success('Saved', { autoClose: 1000 })
     }
+  }
+
+  if (loading) {
+    return (
+      <Flex w='full' bg='white' my={8} borderRadius={8} align="center" justify="center">
+        <Spinner />
+      </Flex>
+    )
   }
 
   return (
