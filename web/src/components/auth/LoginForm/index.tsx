@@ -8,7 +8,6 @@ import {
   FormControl,
   FormLabel,
   Input,
-  Checkbox,
   Stack,
   Link,
   Button,
@@ -91,24 +90,7 @@ export function LoginForm () {
             </InputRightElement>
           </InputGroup>
         </FormControl>
-        <Stack spacing={10}>
-          <Stack
-            direction={{ base: 'column', sm: 'row' }}
-            align={'start'}
-            justify={'space-between'}
-          >
-            <Checkbox
-              checked={formData.rememberMe}
-              name='rememberMe'
-              defaultChecked
-              onChange={(e) => setFormData(prev => ({ ...prev, rememberMe: e.currentTarget.checked }))}
-              autoComplete='remember-me'
-              disabled={isLoading}
-            >
-              Remember me
-            </Checkbox>
-          </Stack>
-          <Button
+        <Button
             colorScheme='brand'
             loadingText="Loading"
             size="lg"
@@ -117,7 +99,6 @@ export function LoginForm () {
           >
             Sign in
           </Button>
-        </Stack>
       </form>
       <Stack pt={6}>
         <Text align={'center'}>
