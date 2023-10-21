@@ -25,7 +25,7 @@ export function HeaderDrawer () {
   async function handleCreateNote () {
     const newNote = await NotesServices.createNote()
 
-    setNotes(prev => ([newNote, ...prev]))
+    setNotes([newNote, ...notes])
     setCurrentNote(newNote)
   }
 
