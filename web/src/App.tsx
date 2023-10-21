@@ -1,5 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import { AuthProvider } from './contexts/auth'
+import { AuthProvider } from './contexts/AuthContext'
 
 import { ToastContainer } from 'react-toastify'
 
