@@ -17,7 +17,7 @@ export async function withAuth (req: Request, res: Response, next: NextFunction)
     const { authorization } = req.headers
 
     if (!authorization) {
-      return res.status(403).json({
+      return res.status(401).json({
         message: 'Forbidden: no authorization token was provided.'
       })
     }
@@ -36,6 +36,6 @@ export async function withAuth (req: Request, res: Response, next: NextFunction)
 
     next()
   } catch {
-    return res.sendStatus(403)
+    return res.sendStatus(401)
   }
 }
