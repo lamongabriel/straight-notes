@@ -9,7 +9,7 @@ export const api = axios.create({
 api.interceptors.response.use(function (response) {
   return response
 }, async function (error) {
-  if (error.response.status === 403) {
+  if (error.response.status === 401) {
     localStorage.removeItem('straightnotes@token')
     window.location.href = '/'
   }
