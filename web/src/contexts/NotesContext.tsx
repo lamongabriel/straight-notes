@@ -41,16 +41,15 @@ export function NotesContextProvider ({ children }: NotesContextProviderProps) {
     try {
       setLoading(true)
 
-      const userNotes: Note[] = await NotesServices.listNotes()
+      let userNotes: Note[] = await NotesServices.listNotes()
 
       if (!userNotes || userNotes?.length === 0) {
-        throw new Error('No notes found')
+        userNotes = []
       }
 
       setNotes(userNotes)
       setCurrentNote(userNotes[0])
     } catch (err) {
-      toast.error('Nenhuma nota encontrada')
     } finally {
       setLoading(false)
     }
